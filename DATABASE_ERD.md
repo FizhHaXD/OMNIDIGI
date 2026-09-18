@@ -1,5 +1,5 @@
-# 📊 Database ERD — PLN DIGI
-> Dokumentasi lengkap struktur database, entitas, atribut, relasi, dan kegunaan setiap tabel pada aplikasi PLN DIGI.
+# Database ERD — PLN DIGI
+Dokumentasi struktur database, entitas, atribut, relasi, dan spesifikasi tabel pada aplikasi PLN DIGI.
 
 ---
 

@@ -1,128 +1,124 @@
-# ⚡ OMNIDIGI — Platform Digital Layanan Kelistrikan Terpadu
+# OMNIDIGI (PLN DIGI)
 
-<p align="center">
-  <img src="public/images/thumbnail-pln.png" alt="OMNIDIGI PLN Banner" width="700" style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);" onerror="this.style.display='none'"/>
-</p>
-
-<p align="center">
-  <strong>Solusi Cerdas, Cepat, dan Transparan untuk Seluruh Kebutuhan Energi Listrik Anda.</strong>
-</p>
-
-<p align="center">
-  <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 13"></a>
-  <a href="https://php.net"><img src="https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.4"></a>
-  <a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS"></a>
-  <a href="https://vitejs.dev"><img src="https://img.shields.io/badge/Vite-6.x-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite"></a>
-  <a href="https://www.sqlite.org"><img src="https://img.shields.io/badge/Database-MySQL%20%7C%20SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="Database"></a>
-</p>
+Aplikasi web layanan kelistrikan digital terpadu berbasis Laravel. Platform ini menyediakan sistem self-service bagi pelanggan PLN untuk mengelola transaksi listrik, monitoring pemakaian, pencatatan meter mandiri, dan pelaporan gangguan.
 
 ---
 
-## 📖 Tentang OMNIDIGI
-
-**OMNIDIGI** adalah aplikasi web modern berbasis *self-service* yang dirancang sebagai platform terpadu pengelolaan layanan kelistrikan digital (mirip ekosistem *PLN Mobile* versi Web). 
-
-Aplikasi ini memberikan kemudahan bagi masyarakat dalam melakukan transaksi pembayaran tagihan pascabayar, pembelian token prabayar, pencatatan meter mandiri (*self-metering*), pemantauan konsumsi daya, pelaporan gangguan kelistrikan (*outage reporting*), hingga simulasi biaya pemasangan baru/perubahan daya secara real-time dan transparan.
-
----
-
-## 🚀 Fitur Unggulan
-
-### 1. 💳 Pembayaran Tagihan & Token Listrik
-- **Cek & Bayar Tagihan Pascabayar**: Pencarian instan tagihan berdasarkan ID Pelanggan dengan rincian pemakaian kWh, tarif, biaya admin, dan status denda/tunggakan.
-- **Beli Token Prabayar**: Pembelian token listrik instan dengan pilihan nominal fleksibel (Rp 20.000 s/d Rp 1.000.000) dan generate otomatis kode token 20 digit unik.
-- **Metode Pembayaran Lengkap**: Integrasi simulasi QRIS, E-Wallet (GoPay, OVO, DANA), dan Virtual Account Bank (BCA, Mandiri, BNI).
-
-### 2. 📸 Catat Meter Mandiri (*Self-Metering*) & Monitoring
-- **Input Angka Meter Mandiri**: Pelanggan dapat menginput foto dan angka *stand meter* bulanan secara mandiri untuk transparansi tagihan.
-- **Monitoring Konsumsi Energi**: Visualisasi riwayat pemakaian daya bulanan, perbandingan tren kWh, dan estimasi biaya berjalan.
-
-### 3. 🚨 Pelaporan Gangguan (*Outage Report*)
-- **Tiket Pengaduan Real-Time**: Laporkan gangguan padam total, tegangan tidak stabil (*voltage drop*), atau kerusakan meteran dengan deteksi lokasi.
-- **Tracking Status Penanganan**: Pantau proses penanganan teknisi langsung dari dashboard (Status: *Dilaporkan* $\rightarrow$ *Diproses* $\rightarrow$ *Selesai*).
-
-### 4. 🧮 Simulasi Tarif & Pasang Baru
-- **Kalkulator Biaya Transparan**: Hitung estimasi biaya sambungan baru atau tambah daya berdasarkan kategori tarif (Rumah Tangga, Bisnis, Industri, Sosial) dan daya VA yang dipilih lengkap dengan rincian biaya beban dan administrasi.
-
-### 5. 🎁 PLN Reward & Loyalitas
-- **Poin Transaksi**: Kumpulkan poin dari setiap transaksi pembayaran tagihan, beli token, dan pengiriman catat meter tepat waktu.
-- **Katalog Voucher & Merchandise**: Tukarkan poin dengan token diskon listrik, kupon belanja, dan merchandise eksklusif.
-
-### 6. 📰 Berita, Tips Hemat Energi & Informasi Pemadaman
-- Portal edukasi tips efisiensi energi listrik rumah tangga/industri, informasi promo cashback, serta jadwal pemeliharaan jaringan terencana.
-
-### 7. 🛡️ Panel Admin & CRM Backoffice
-- **Dashboard Manajemen CRM**: Kelola data pelanggan, pantau status tagihan lunas/tunggakan, verifikasi bacaan meteran, dan monitor seluruh arus transaksi secara komprehensif.
+## Daftar Isi
+- [Gambaran Proyek](#gambaran-proyek)
+- [Fitur Utama](#fitur-utama)
+- [Teknologi yang Digunakan](#teknologi-yang-digunakan)
+- [Struktur Direktori](#struktur-direktori)
+- [Akun Demo](#akun-demo)
+- [Instalasi dan Menjalankan Proyek](#instalasi-dan-menjalankan-proyek)
+- [Dokumentasi Terkait](#dokumentasi-terkait)
+- [Lisensi](#lisensi)
 
 ---
 
-## 🏗️ Arsitektur & Teknologi
+## Gambaran Proyek
 
-- **Backend Framework**: [Laravel 13](https://laravel.com) (PHP 8.4)
-- **Frontend & UI**: Blade Templating, [Tailwind CSS](https://tailwindcss.com), [Vite](https://vitejs.dev), Heroicons
-- **Database**: MySQL / SQLite (Normalisasi 3NF)
-- **Authentication**: Laravel Breeze (Role-Based Access Control: `admin` & `user`)
-- **Desain & Warna**: PLN Corporate Identity (PLN Deep Blue `#00529C` & PLN Bright Yellow `#FDB813`)
+OMNIDIGI dikembangkan untuk memfasilitasi kebutuhan operasional dan administrasi kelistrikan secara digital. Sistem ini mencakup layanan pelanggan (front-office) dan panel administrasi (backoffice) untuk memantau data pelanggan, riwayat transaksi, dan laporan operasional.
 
 ---
 
-## 📁 Struktur Direktori Proyek
+## Fitur Utama
+
+### 1. Layanan Produk & Pembayaran
+- **Tagihan Listrik Pascabayar**: Pengecekan tagihan berdasarkan ID Pelanggan, rincian penggunaan daya (kWh), biaya beban, denda keterlambatan, dan status pembayaran.
+- **Token Listrik Prabayar**: Pembelian token listrik prabayar dengan nominal fleksibel (Rp 20.000 hingga Rp 1.000.000) dan generate 20 digit nomor token listrik.
+- **Simulasi Pembayaran**: Mendukung simulasi channel pembayaran QRIS, e-wallet (GoPay, OVO, DANA), dan transfer bank (BCA, Mandiri, BNI).
+
+### 2. Catat Meter Mandiri (Self-Metering) & Monitoring
+- **Input Angka Meter Mandiri**: Pelanggan dapat memasukkan angka stand meteran secara berkala untuk keperluan verifikasi dan estimasi tagihan.
+- **Monitoring Konsumsi Energi**: Rekapitulasi pemakaian listrik bulanan dan riwayat konsumsi kWh.
+
+### 3. Pelaporan Gangguan Listrik (Outage Report)
+- **Pelaporan Insiden**: Form pelaporan pemadaman listrik, kendala tegangan, atau kerusakan fisik meteran.
+- **Pelacakan Status**: Monitoring progres tiket aduan dari status dilaporkan, diproses, hingga selesai.
+
+### 4. Simulasi Pasang Baru & Perubahan Daya
+- **Kalkulator Tarif Listrik**: Perhitungan estimasi biaya pasang baru atau tambah daya berdasarkan kategori tarif (Rumah Tangga, Bisnis, Industri, Sosial) dan kapasitas daya VA.
+
+### 5. PLN Reward & Program Loyalitas
+- **Akumulasi Poin**: Sistem poin dari transaksi pembayaran dan pencatatan meter.
+- **Penukaran Reward**: Katalog penukaran poin untuk voucher diskon token listrik dan merchandise.
+
+### 6. Berita & Informasi Pemeliharaan
+- Publikasi artikel edukasi efisiensi energi, informasi pemadaman terjadwal, dan promo.
+
+### 7. Panel Administrasi Backoffice
+- **Manajemen Data Pelanggan**: Pengelolaan data master pelanggan (CRUD).
+- **Monitoring Transaksi**: Rekapitulasi dan audit status transaksi pembayaran tagihan dan pembelian token.
+- **Dashboard Analitik**: Ringkasan statistik operasional, pendapatan, dan status tiket gangguan.
+
+---
+
+## Teknologi yang Digunakan
+
+- **Backend**: PHP 8.4, Laravel 13
+- **Frontend**: Blade Template, Tailwind CSS, Vite, JavaScript
+- **Database**: SQLite / MySQL (Skema relasional 3NF)
+- **Autentikasi**: Laravel Breeze (Role: `admin` dan `user`)
+
+---
+
+## Struktur Direktori
 
 ```text
 OMNIDIGI/
 ├── app/
 │   ├── Http/
 │   │   ├── Controllers/
-│   │   │   ├── Admin/          # Controller Backoffice CRM & Manajemen Pelanggan
-│   │   │   ├── DashboardController.php  # Dashboard Pengguna, Self-metering, Monitoring
-│   │   │   ├── HomeController.php       # Halaman Utama / Landing Page
-│   │   │   ├── NewsController.php       # Informasi, Berita & Tips Edukasi
-│   │   │   ├── OutageController.php     # Manajemen Pelaporan Gangguan Listrik
-│   │   │   ├── ProdukController.php     # Cek/Bayar Tagihan & Pembelian Token
-│   │   │   ├── RewardController.php     # Program Loyalitas & Poin PLN Reward
-│   │   │   └── SimulasiController.php   # Kalkulator Simulasi Pasang Baru
-│   │   └── Middleware/         # AdminMiddleware (Role Guard)
-│   └── Models/                 # Eloquent Models (Customer, Bill, Transaction, Tariff, dll)
+│   │   │   ├── Admin/          # Controller backoffice admin
+│   │   │   ├── DashboardController.php
+│   │   │   ├── HomeController.php
+│   │   │   ├── NewsController.php
+│   │   │   ├── OutageController.php
+│   │   │   ├── ProdukController.php
+│   │   │   ├── RewardController.php
+│   │   │   └── SimulasiController.php
+│   │   └── Middleware/         # AdminMiddleware (Role Protection)
+│   └── Models/                 # Eloquent Models
 ├── database/
-│   ├── migrations/             # Struktur Skema Database
-│   └── seeders/                # Data Awal Demo (Users, Pelanggan, Tagihan, Berita)
+│   ├── migrations/             # Skema migrasi database
+│   └── seeders/                # Database seeder untuk data awal
 ├── resources/
-│   ├── css/                    # Custom Tailwind & Styling Token
-│   └── views/                  # Blade Views (Admin, Dashboard, Produk, Auth, Components)
+│   ├── css/                    # Tailwind CSS configuration & custom styles
+│   └── views/                  # Blade templates (Admin, Dashboard, Produk, Layouts)
 ├── routes/
-│   ├── web.php                 # Rute Aplikasi Web
-│   └── auth.php                # Rute Autentikasi Breeze
-├── DATABASE_ERD.md             # Dokumentasi Lengkap Skema Database & ERD
-├── INSTALLATION.md             # Panduan Lengkap Instalasi & Setup Proyek
-└── README.md                   # Dokumentasi Utama
+│   ├── web.php                 # Rute publik, user, dan admin
+│   └── auth.php                # Rute autentikasi
+├── DATABASE_ERD.md             # Dokumentasi Entity Relationship Diagram
+├── INSTALLATION.md             # Panduan instalasi dan deployment
+└── README.md
 ```
 
 ---
 
-## 🔑 Akun Demo Pengujian
+## Akun Demo
 
-Aplikasi telah dilengkapi data *seeder* lengkap untuk pengujian langsung:
+Untuk keperluan pengujian, database seeder telah menyediakan akun berikut:
 
-| Role | Email | Password | Keterangan |
+| Role | Email | Password | Akses |
 |---|---|---|---|
-| **Admin** | `admin@plndigi.com` | `password` | Akses penuh dashboard backoffice `/admin` |
-| **Pelanggan** | `hafizh@mail.com` | `password` | Akun pelanggan dengan histori tagihan & transaksi |
+| Admin | `admin@plndigi.com` | `password` | Panel Admin (`/admin`) |
+| User | `hafizh@mail.com` | `password` | Dashboard Pelanggan (`/dashboard`) |
 
-#### Contoh ID Pelanggan untuk Pengujian:
-- `531200012345` — Rumah Tangga (R1/1300 VA)
-- `531200026789` — Rumah Tangga (R1/2200 VA)
-- `531200043344` — Bisnis (B1/6600 VA)
+Contoh ID Pelanggan untuk pengujian:
+- `531200012345` (Rumah Tangga R1/1300 VA)
+- `531200026789` (Rumah Tangga R1/2200 VA)
+- `531200043344` (Bisnis B1/6600 VA)
 
 ---
 
-## 🚀 Panduan Instalasi & Menjalankan Aplikasi
+## Instalasi dan Menjalankan Proyek
 
-Untuk panduan instalasi langkah demi langkah dari awal hingga aplikasi berjalan di komputer lokal Anda, silakan baca:
+Panduan langkah demi langkah tersedia pada file [INSTALLATION.md](INSTALLATION.md).
 
-👉 **[PANDUAN INSTALASI LENGKAP (INSTALLATION.md)](INSTALLATION.md)**
+Ringkasan perintah untuk menjalankan proyek:
 
 ```bash
-# Ringkasan Cepat:
 git clone https://github.com/FizhHaXD/OMNIDIGI.git
 cd OMNIDIGI
 composer install
@@ -136,14 +132,13 @@ php artisan serve
 
 ---
 
-## 📊 Dokumentasi Database (ERD)
+## Dokumentasi Terkait
 
-Untuk mempelajari struktur data, relasi antar tabel (3NF), dan *business workflow*, silakan lihat:
-
-👉 **[DOKUMENTASI DATABASE & ERD (DATABASE_ERD.md)](DATABASE_ERD.md)**
+- [Panduan Instalasi Lengkap (INSTALLATION.md)](INSTALLATION.md)
+- [Dokumentasi Database & ERD (DATABASE_ERD.md)](DATABASE_ERD.md)
 
 ---
 
-## 📄 Lisensi
+## Lisensi
 
-Proyek ini dikembangkan untuk kebutuhan kompetisi dan pembelajaran di bawah lisensi [MIT License](LICENSE).
+Proyek ini dirilis di bawah lisensi [MIT](LICENSE).
