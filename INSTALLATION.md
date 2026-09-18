@@ -73,14 +73,20 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### Langkah 7: Eksekusi Migrasi dan Seeder
-Jalankan perintah berikut untuk membuat struktur tabel dan mengisi data awal:
+### Langkah 7: Persiapan Database (Pilih Salah Satu)
+
+#### Cara A: Menggunakan Migration & Seeder Laravel (Direkomendasikan)
+Jalankan perintah berikut untuk membuat struktur tabel dan mengisi data awal secara otomatis:
 
 ```bash
 php artisan migrate:fresh --seed
 ```
 
-Data awal mencakup akun admin, akun user pengujian, master tarif, metode pembayaran, pelanggan, dan transaksi contoh.
+#### Cara B: Import File SQL Manual (Opsional)
+Jika Anda menggunakan phpMyAdmin, HeidiSQL, DBeaver, atau MySQL CLI:
+1. Buat database baru bernama `plndigi`.
+2. Import file dump yang sudah disediakan pada direktori: `database/plndigi.sql`.
+3. Sesuaikan parameter `DB_DATABASE` pada file `.env`.
 
 ### Langkah 8: Konfigurasi Storage Link
 ```bash
