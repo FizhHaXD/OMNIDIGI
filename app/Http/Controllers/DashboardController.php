@@ -48,12 +48,9 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        // Berita terbaru
-        $latestNews = News::published()->latest('published_at')->take(3)->get();
-
         return view('dashboard.index', compact(
             'user', 'customer', 'customers', 'totalTagihan',
-            'tagihanBelumBayar', 'lastToken', 'recentTransactions', 'latestNews'
+            'tagihanBelumBayar', 'lastToken', 'recentTransactions'
         ));
     }
 

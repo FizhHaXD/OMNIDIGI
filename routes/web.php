@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OutageController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RewardController;
@@ -16,9 +17,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/simulasi', [SimulasiController::class, 'index'])->name('simulasi');
 Route::post('/simulasi', [SimulasiController::class, 'hitung'])->name('simulasi.hitung');
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
-Route::get('/produk/tagihan', [ProdukController::class, 'tagihan'])->name('produk.tagihan');
-Route::post('/produk/tagihan/cek', [ProdukController::class, 'cekTagihan'])->name('produk.cekTagihan');
-Route::get('/produk/token', [ProdukController::class, 'token'])->name('produk.token');
+
+// ── Pembayaran QRIS & Simulasi Scan ──
+Route::get('/bayar/qris', [PembayaranController::class, 'qris'])->name('qris.tampil');
+Route::get('/bayar/qris/simulasi/{kode}', [PembayaranController::class, 'simulasi'])->name('qris.simulasi');
+Route::get('/bayar/qris/check/{kode}', [PembayaranController::class, 'checkStatus'])->name('qris.check');
 
 // News (publik)
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
@@ -26,6 +29,12 @@ Route::get('/news/{slug}', [NewsController::class, 'show'])->name('news.show');
 
 // ── Auth Required Routes ──
 Route::middleware('auth')->group(function () {
+    // Layanan Produk
+    Route::get('/produk/tagihan', [ProdukController::class, 'tagihan'])->name('produk.tagihan');
+    Route::post('/produk/tagihan/cek', [ProdukController::class, 'cekTagihan'])->name('produk.cekTagihan');
+    Route::get('/produk/token', [ProdukController::class, 'token'])->name('produk.token');
+    Route::post('/produk/token/cek', [ProdukController::class, 'cekToken'])->name('produk.cekToken');
+
     // Dashboard user
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/tagihan', [DashboardController::class, 'tagihan'])->name('dashboard.tagihan');
@@ -46,6 +55,7 @@ Route::middleware('auth')->group(function () {
     // Pembayaran
     Route::post('/produk/bayar', [ProdukController::class, 'bayar'])->name('produk.bayar');
     Route::post('/produk/konfirmasi/{transaction}', [ProdukController::class, 'konfirmasi'])->name('produk.konfirmasi');
+    Route::get('/produk/sukses/{transaction}', [ProdukController::class, 'sukses'])->name('produk.sukses');
 
     // Profile (dari Breeze)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

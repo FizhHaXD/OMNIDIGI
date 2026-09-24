@@ -56,6 +56,14 @@
                         <div class="absolute -bottom-3 left-0 right-0 h-[3px] bg-[#FDB813] rounded-t-sm shadow-[0_0_8px_rgba(253,184,19,0.5)]"></div>
                     @endif
                 </a>
+
+                <a href="{{ route('news.index') }}" class="flex items-center gap-2.5 text-[15px] font-medium transition-colors relative pb-1 {{ request()->routeIs('news*') ? 'text-white' : 'text-white/80 hover:text-white' }}">
+                    <i class="fas fa-newspaper {{ request()->routeIs('news*') ? '' : 'opacity-80 group-hover:opacity-100' }}"></i>
+                    Berita
+                    @if(request()->routeIs('news*'))
+                        <div class="absolute -bottom-3 left-0 right-0 h-[3px] bg-[#FDB813] rounded-t-sm shadow-[0_0_8px_rgba(253,184,19,0.5)]"></div>
+                    @endif
+                </a>
                 
                 @auth
                     <a href="{{ route('dashboard') }}" class="flex items-center gap-2.5 text-[15px] font-medium transition-colors relative pb-1 {{ request()->routeIs('dashboard*') ? 'text-white' : 'text-white/80 hover:text-white' }}">
@@ -119,6 +127,7 @@
             <a href="{{ route('home') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-900 hover:bg-slate-50"><i class="fas fa-home w-6 text-center text-[#1B6EBB]"></i> Beranda</a>
             <a href="{{ route('simulasi') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-50"><i class="fas fa-search w-6 text-center text-[#1B6EBB]"></i> Simulasi</a>
             <a href="{{ route('produk') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-50"><i class="fas fa-building w-6 text-center text-[#1B6EBB]"></i> Produk</a>
+            <a href="{{ route('news.index') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-50"><i class="fas fa-newspaper w-6 text-center text-[#1B6EBB]"></i> Berita</a>
             @auth
                 <a href="{{ route('dashboard') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-50"><i class="fas fa-table-columns w-6 text-center text-[#1B6EBB]"></i> Dashboard</a>
                 <hr class="border-slate-100 my-2">

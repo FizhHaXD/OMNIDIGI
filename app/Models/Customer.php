@@ -16,11 +16,6 @@ class Customer extends Model
         'alamat',
         'nomor_telepon',
         'email',
-        'status_aktif',
-    ];
-
-    protected $casts = [
-        'status_aktif' => 'boolean',
     ];
 
     public function user(): BelongsTo
@@ -49,18 +44,19 @@ class Customer extends Model
     }
 
     /**
-     * Tagihan yang belum lunas
+     * Tagihan yang belum lunas (unpaid + overdue)
      */
     public function unpaidBills(): HasMany
     {
-        return $this->hasMany(Bill::class)->where('status', 'unpaid');
+        return $this->hasMany(Bill::class)->whereIn('status', ['unpaid', 'overdue']);
     }
 
     /**
-     * Total tagihan yang belum lunas
+     * Total tagihan yang belum lunas (tagihan + denda)
      */
     public function getTotalTagihanAttribute(): float
     {
-        return $this->unpaidBills()->sum('total_biaya');
+        $bills = $this->unpaidBills()->get();
+        return (float) $bills->sum('total_biaya') + (float) $bills->sum('denda');
     }
 }

@@ -205,14 +205,15 @@ CREATE TABLE `meter_readings` (
 INSERT INTO `meter_readings` (`id`, `customer_id`, `bulan`, `tahun`, `meteran_awal`, `meteran_akhir`, `status`, `created_at`, `updated_at`) VALUES
 (1, 1, 7, 2026, 1250.00, 1447.00, 'billed', NOW(), NOW()),
 (2, 1, 8, 2026, 1447.00, 1645.00, 'billed', NOW(), NOW()),
-(3, 1, 9, 2026, 1645.00, 1843.00, 'verified', NOW(), NOW()),
+(3, 1, 9, 2026, 1645.00, 1843.00, 'billed', NOW(), NOW()),
 (4, 2, 8, 2026, 3200.00, 3512.00, 'billed', NOW(), NOW()),
 (5, 2, 9, 2026, 3512.00, 3820.00, 'verified', NOW(), NOW()),
 (6, 3, 8, 2026, 890.00, 1022.00, 'billed', NOW(), NOW()),
 (7, 3, 9, 2026, 1022.00, 1150.00, 'verified', NOW(), NOW()),
 (8, 4, 8, 2026, 7800.00, 8350.00, 'billed', NOW(), NOW()),
 (9, 4, 9, 2026, 8350.00, 8900.00, 'verified', NOW(), NOW()),
-(10, 5, 9, 2026, 2100.00, 2320.00, 'verified', NOW(), NOW());
+(10, 5, 9, 2026, 2100.00, 2320.00, 'verified', NOW(), NOW()),
+(11, 1, 10, 2026, 1843.00, 2050.00, 'billed', NOW(), NOW());
 
 -- --------------------------------------------------------
 -- Table structure for table `bills`
@@ -243,10 +244,12 @@ CREATE TABLE `bills` (
 -- Dumping data for table `bills`
 INSERT INTO `bills` (`id`, `customer_id`, `meter_reading_id`, `bulan`, `tahun`, `total_kwh`, `total_biaya`, `denda`, `status`, `tanggal_jatuh_tempo`, `tanggal_bayar`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, 7, 2026, 197.00, 284606.90, 0.00, 'paid', '2026-07-31', '2026-07-26', NOW(), NOW()),
-(2, 1, 2, 8, 2026, 198.00, 286050.60, 0.00, 'unpaid', '2026-08-31', NULL, NOW(), NOW()),
+(2, 1, 2, 8, 2026, 198.00, 286050.60, 0.00, 'paid', '2026-08-31', '2026-08-25', NOW(), NOW()),
 (3, 2, 4, 8, 2026, 312.00, 518237.40, 0.00, 'unpaid', '2026-08-31', NULL, NOW(), NOW()),
 (4, 3, 6, 8, 2026, 132.00, 99860.00, 0.00, 'paid', '2026-08-31', '2026-08-28', NOW(), NOW()),
-(5, 4, 8, 8, 2026, 550.00, 983908.50, 50000.00, 'overdue', '2026-07-31', NULL, NOW(), NOW());
+(5, 4, 8, 8, 2026, 550.00, 983908.50, 50000.00, 'overdue', '2026-07-31', NULL, NOW(), NOW()),
+(6, 1, 3, 9, 2026, 198.00, 286050.60, 0.00, 'unpaid', '2026-09-30', NULL, NOW(), NOW()),
+(7, 1, 11, 10, 2026, 207.00, 299052.90, 0.00, 'unpaid', '2026-10-31', NULL, NOW(), NOW());
 
 -- --------------------------------------------------------
 -- Table structure for table `transactions`

@@ -137,17 +137,17 @@
                             <p class="text-white/50 text-[11.5px] leading-relaxed">Riwayat Transaksi Listrik</p>
                         </div>
 
-                        {{-- Feature 3: Support --}}
-                        <div class="flex flex-col pt-5 md:pt-0 md:pl-8 group/feat cursor-pointer">
+                        {{-- Feature 3: Berita PLN --}}
+                        <a href="{{ route('news.index') }}" class="flex flex-col pt-5 md:pt-0 md:pl-8 group/feat">
                             <div class="flex items-start justify-between mb-4">
                                 <div class="w-9 h-9 border border-white/20 rounded-xl flex items-center justify-center bg-white/5 group-hover/feat:border-[#FDB813]/50 group-hover/feat:bg-[#FDB813]/10 transition-all">
-                                    <i class="fas fa-headset text-[#FDB813] text-sm"></i>
+                                    <i class="fas fa-newspaper text-[#FDB813] text-sm"></i>
                                 </div>
                                 <i class="fas fa-arrow-right text-white/25 text-[10px] mt-1 group-hover/feat:text-white/60 transition-colors"></i>
                             </div>
-                            <span class="text-[13.5px] font-bold text-[#FDB813] mb-1 group-hover/feat:text-[#ffd060] transition-colors">Belum tersedia</span>
-                            <p class="text-white/50 text-[11.5px] leading-relaxed">Penerima Manfaat Support</p>
-                        </div>
+                            <span class="text-[13.5px] font-bold text-white group-hover/feat:text-[#FDB813] transition-colors">Berita & Promo</span>
+                            <p class="text-white/50 text-[11.5px] leading-relaxed">Informasi Resmi PLN</p>
+                        </a>
 
                     </div>
                 </div>
@@ -281,6 +281,77 @@
         </div>
     </div>
 </section>
+
+{{-- ══ BERITA TERBARU ══ --}}
+@if(isset($latestNews) && $latestNews->isNotEmpty())
+<section class="py-16 bg-white border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {{-- Section Header --}}
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+            <div>
+                <span class="section-label">Informasi & Edukasi</span>
+                <h2 class="section-title">Kabar & Berita Terbaru</h2>
+                <p class="text-slate-500 text-sm mt-1 max-w-xl">Ikuti perkembangan informasi terkini, panduan kelistrikan, dan penawaran promo menarik dari PLN DIGI.</p>
+            </div>
+            <div>
+                <a href="{{ route('news.index') }}" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1B6EBB] hover:text-[#00529C] transition-colors group">
+                    <span>Lihat Semua Berita</span>
+                    <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        {{-- News Cards Grid --}}
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($latestNews as $item)
+            <a href="{{ route('news.show', $item->slug) }}" class="card overflow-hidden group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full bg-white border border-slate-200/80 rounded-2xl">
+                {{-- Image or Gradient Thumbnail --}}
+                @if($item->gambar)
+                <div class="h-48 bg-slate-100 overflow-hidden relative">
+                    <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute top-3 left-3">
+                        <span class="inline-block px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider bg-white/95 backdrop-blur-sm text-[#00529C] shadow-sm">
+                            {{ $item->label_kategori }}
+                        </span>
+                    </div>
+                </div>
+                @else
+                <div class="h-48 bg-gradient-to-br from-[#1B6EBB] to-[#003d75] flex items-center justify-center relative overflow-hidden">
+                    <i class="fas fa-newspaper text-white/30 text-5xl group-hover:scale-110 transition-transform duration-300"></i>
+                    <div class="absolute top-3 left-3">
+                        <span class="inline-block px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider bg-white/95 backdrop-blur-sm text-[#00529C] shadow-sm">
+                            {{ $item->label_kategori }}
+                        </span>
+                    </div>
+                </div>
+                @endif
+
+                {{-- Content --}}
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 text-xs text-slate-400 mb-2.5">
+                            <i class="far fa-calendar-alt text-slate-400"></i>
+                            <span>{{ $item->published_at ? $item->published_at->format('d M Y') : '-' }}</span>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-800 mb-2 line-clamp-2 group-hover:text-[#1B6EBB] transition-colors leading-snug">
+                            {{ $item->judul }}
+                        </h3>
+                        <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+                            {{ $item->excerpt }}
+                        </p>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-[#1B6EBB] group-hover:text-[#00529C]">
+                        <span>Baca Selengkapnya</span>
+                        <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
 
 {{-- ══ TAGLINE BAR (like SatuBeasiswa) ══ --}}
 <section class="py-8 bg-white border-y border-slate-100">

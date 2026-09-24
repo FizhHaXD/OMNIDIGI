@@ -58,9 +58,9 @@
         </div>
         @endif
 
-        {{-- Grid Menu Fitur (3x3) --}}
+        {{-- Grid Menu Fitur (4x2) --}}
         <h2 class="text-lg font-bold text-slate-900 mb-5">Layanan</h2>
-        <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-10">
+        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-4 mb-10">
             {{-- Bayar Tagihan --}}
             <a href="{{ route('dashboard.tagihan') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
                 <div class="w-12 h-12 bg-[#00529C]/10 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-[#00529C]/20 transition-colors">
@@ -124,15 +124,6 @@
                 <p class="text-[11px] text-slate-400 mt-0.5">Poin & Hadiah</p>
             </a>
 
-            {{-- News PLN --}}
-            <a href="{{ route('news.index') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
-                <div class="w-12 h-12 bg-sky-50 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-sky-100 transition-colors">
-                    <i class="fas fa-newspaper text-sky-600 text-lg"></i>
-                </div>
-                <p class="text-sm font-semibold text-slate-700">Berita PLN</p>
-                <p class="text-[11px] text-slate-400 mt-0.5">Info & Promo</p>
-            </a>
-
             {{-- Profil --}}
             <a href="{{ route('profile.edit') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
                 <div class="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-slate-200 transition-colors">
@@ -182,31 +173,6 @@
                     </table>
                 </div>
             </div>
-        @endif
-
-        {{-- Berita Terbaru --}}
-        @if($latestNews->isNotEmpty())
-        <h2 class="text-lg font-bold text-slate-900 mb-4">Berita Terbaru</h2>
-        <div class="grid md:grid-cols-3 gap-5 mb-8">
-            @foreach($latestNews as $news)
-            <a href="{{ route('news.show', $news->slug) }}" class="card overflow-hidden group hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
-                @if($news->gambar)
-                <div class="h-40 bg-slate-100 overflow-hidden">
-                    <img src="{{ asset('storage/' . $news->gambar) }}" alt="{{ $news->judul }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                @else
-                <div class="h-40 bg-gradient-to-br from-[#00529C] to-[#003d75] flex items-center justify-center">
-                    <i class="fas fa-newspaper text-white/30 text-4xl"></i>
-                </div>
-                @endif
-                <div class="p-5">
-                    <span class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider bg-[#00529C]/10 text-[#00529C] mb-2">{{ $news->label_kategori }}</span>
-                    <h3 class="text-sm font-bold text-slate-800 mb-1.5 line-clamp-2 group-hover:text-[#00529C] transition-colors">{{ $news->judul }}</h3>
-                    <p class="text-xs text-slate-400">{{ $news->published_at->format('d M Y') }}</p>
-                </div>
-            </a>
-            @endforeach
-        </div>
         @endif
 
     </div>

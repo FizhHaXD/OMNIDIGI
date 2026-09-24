@@ -102,7 +102,7 @@ class DatabaseSeeder extends Seeder
             // customer[0] - Hafizh, R1-1300
             ['customer_id' => $customerModels[0]->id, 'bulan' => $now->copy()->subMonths(2)->month, 'tahun' => $now->copy()->subMonths(2)->year, 'meteran_awal' => 1250, 'meteran_akhir' => 1447, 'status' => 'billed'],
             ['customer_id' => $customerModels[0]->id, 'bulan' => $now->copy()->subMonth()->month,   'tahun' => $now->copy()->subMonth()->year,   'meteran_awal' => 1447, 'meteran_akhir' => 1645, 'status' => 'billed'],
-            ['customer_id' => $customerModels[0]->id, 'bulan' => $now->month,                       'tahun' => $now->year,                       'meteran_awal' => 1645, 'meteran_akhir' => 1843, 'status' => 'verified'],
+            ['customer_id' => $customerModels[0]->id, 'bulan' => $now->month,                       'tahun' => $now->year,                       'meteran_awal' => 1645, 'meteran_akhir' => 1843, 'status' => 'billed'],
             // customer[1] - Budi, R1-2200
             ['customer_id' => $customerModels[1]->id, 'bulan' => $now->copy()->subMonth()->month,   'tahun' => $now->copy()->subMonth()->year,   'meteran_awal' => 3200, 'meteran_akhir' => 3512, 'status' => 'billed'],
             ['customer_id' => $customerModels[1]->id, 'bulan' => $now->month,                       'tahun' => $now->year,                       'meteran_awal' => 3512, 'meteran_akhir' => 3820, 'status' => 'verified'],
@@ -137,6 +137,12 @@ class DatabaseSeeder extends Seeder
              'bulan' => $meterModels[1]->bulan, 'tahun' => $meterModels[1]->tahun,
              'total_kwh' => 198, 'total_biaya' => 286050.6, 'denda' => 0, 'status' => 'unpaid',
              'tanggal_jatuh_tempo' => $now->copy()->subMonth()->endOfMonth()->toDateString(),
+             'tanggal_bayar' => null],
+            // Hafizh - bulan berjalan (belum lunas)
+            ['customer_id' => $customerModels[0]->id, 'meter_reading_id' => $meterModels[2]->id,
+             'bulan' => $meterModels[2]->bulan, 'tahun' => $meterModels[2]->tahun,
+             'total_kwh' => 198, 'total_biaya' => 286050.6, 'denda' => 0, 'status' => 'unpaid',
+             'tanggal_jatuh_tempo' => $now->copy()->endOfMonth()->toDateString(),
              'tanggal_bayar' => null],
             // Budi - bulan lalu (belum lunas)
             ['customer_id' => $customerModels[1]->id, 'meter_reading_id' => $meterModels[3]->id,

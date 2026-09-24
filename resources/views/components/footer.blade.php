@@ -29,6 +29,7 @@
             <div class="md:col-span-2">
                 <h4 class="text-sm font-semibold text-white/90 mb-4">Informasi</h4>
                 <ul class="space-y-2.5 text-sm">
+                    <li><a href="{{ route('news.index') }}" class="text-white/40 hover:text-white/80 transition-colors">Berita & Promo</a></li>
                     <li><a href="#" class="text-white/40 hover:text-white/80 transition-colors">Tentang PLN</a></li>
                     <li><a href="#" class="text-white/40 hover:text-white/80 transition-colors">Kebijakan Privasi</a></li>
                     <li><a href="#" class="text-white/40 hover:text-white/80 transition-colors">Syarat & Ketentuan</a></li>
