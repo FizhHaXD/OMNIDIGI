@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLN DIGI — UI/UX Color System Handover</title>
+    <style>
+        :root {
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --bg-page: #f8fafc;
+            --surface-card: #ffffff;
+            --border-color: #e2e8f0;
+            --text-title: #0f172a;
+            --text-body: #334155;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-page);
+            color: var(--text-body);
+            line-height: 1.5;
+            padding: 40px 24px 80px;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 36px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .badge-header {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: #00529C;
+            color: #ffffff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-title);
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Section */
+        section {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 28px;
+        }
+
+        .section-header {
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-title);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-header p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Grid Swatches */
+        .swatch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 16px;
+        }
+
+        .swatch-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #ffffff;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .swatch-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .swatch-preview {
+            height: 90px;
+            width: 100%;
+            position: relative;
+        }
+
+        .swatch-info {
+            padding: 12px 14px;
+        }
+
+        .token-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-title);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .copy-hint {
+            font-size: 10px;
+            font-weight: 500;
+            color: #00529C;
+            background: #eff6ff;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .hex-code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .swatch-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Gradients */
+        .gradient-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .gradient-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .gradient-bar {
+            height: 54px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .gradient-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 12px;
+        }
+
+        .gradient-stops {
+            display: flex;
+            gap: 16px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 12px;
+        }
+
+        .stop-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f1f5f9;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .stop-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* Semantic Badges Preview */
+        .badge-preview-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .badge-preview-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .pill-sample {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            border-width: 1px;
+            border-style: solid;
+        }
+
+        /* Table Specs */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 12px;
+            background: #f8fafc;
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td {
+            padding: 11px 12px;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+        }
+
+        .table-mono {
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-weight: 600;
+            color: var(--text-title);
+        }
+
+        .color-dot-inline {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            margin-right: 6px;
+            vertical-align: middle;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* Toast */
+        #toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #0f172a;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: 6px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            opacity: 0;
+            transform: translateY(8px);
+            transition: all 0.2s ease;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        #toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <header>
+        <span class="badge-header">Design System Spec</span>
+        <h1>PLN DIGI — UI/UX Color Tokens</h1>
+        <p class="subtitle">Dokumentasi spesifikasi token warna, gradasi, feedback semantic, dan efek visual yang digunakan di website PLN DIGI untuk acuan Color Styles / Variables di Figma.</p>
+    </header>
+
+    <!-- 1. Brand Tokens -->
+    <section>
+        <div class="section-header">
+            <h2>1. Brand Tokens</h2>
+            <p>Warna identitas inti PLN & PLN DIGI. Klik kartu untuk menyalin kode HEX.</p>
+        </div>
+        <div class="swatch-grid">
+            <div class="swatch-card" onclick="copyHex('#00529C')">
+                <div class="swatch-preview" style="background: #00529C;"></div>
+                <div class="swatch-info">
+                    <div class="token-name"><span>Brand/Primary</span><span class="copy-hint">Copy</span></div>
+                    <div class="hex-code">#00529C</div>
+                    <div class="swatch-desc">Biru Resmi PLN. Tombol utama, navbar aktif, nominal tagihan, ikon utama, badge QRIS.</div>
+                </div>
+            </div>
+
+            <div class="swatch-card" onclick="copyHex('#FDB813')">
+                <div class="swatch-preview" style="background: #FDB813;"></div>
+                <div class="swatch-info">
+                    <div class="token-name"><span>Brand/Secondary</span><span class="copy-hint">Copy</span></div>
+                    <div class="hex-code">#FDB813</div>
+                    <div class="swatch-desc">Kuning Petir PLN. Aksen petir, bar indikator aktif navbar, rating, glow effects, badge token.</div>
+                </div>
+            </div>
+
+            <div class="swatch-card" onclick="copyHex('#2D6DA8')">
+                <div class="swatch-preview" style="background: #2D6DA8;"></div>
+                <div class="swatch-info">
+                    <div class="token-name"><span>Brand/Primary-Medium</span><span class="copy-hint">Copy</span></div>
+                    <div class="hex-code">#2D6DA8</div>
+                    <div class="swatch-desc">Biru medium untuk background navbar blur, section CTA, stat bar angka pelanggan.</div>
+                </div>
+            </div>
+
+            <div class="swatch-card" onclick="copyHex('#D4980A')">
+                <div class="swatch-preview" style="background: #D4980A;"></div>
+                <div class="swatch-info">
+                    <div class="token-name"><span>Brand/Secondary-Warm</span><span class="copy-hint">Copy</span></div>
+                    <div class="hex-code">#D4980A</div>
+                    <div class="swatch-desc">Emas hangat untuk tombol sekunder (Secondary Button) dan garis penegas tab.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Gradients -->
+    <section>
+        <div class="section-header">
+            <h2>2. Linear Gradients</h2>
+            <p>Pengaturan gradasi untuk hero beranda, panel login, dan header halaman.</p>
+        </div>
+
+        <!-- Gradient A -->
+        <div class="gradient-card">
+            <div class="token-name" style="margin-bottom: 8px;">
+                <strong>Gradient/Header-DarkNavy</strong>
+                <span class="table-mono">135° (Top-Left ke Bottom-Right)</span>
+            </div>
+            <div class="gradient-bar" style="background: linear-gradient(135deg, #001230 0%, #00265A 50%, #001A4D 100%);"></div>
+            <div class="gradient-details">
+                <span class="swatch-desc">Digunakan pada: Header semua halaman dalam (Simulasi, Produk, Dashboard, News), Footer.</span>
+                <div class="gradient-stops">
+                    <span class="stop-pill" onclick="copyHex('#001230')"><span class="stop-dot" style="background:#001230"></span> 0%: #001230</span>
+                    <span class="stop-pill" onclick="copyHex('#00265A')"><span class="stop-dot" style="background:#00265A"></span> 50%: #00265A</span>
+                    <span class="stop-pill" onclick="copyHex('#001A4D')"><span class="stop-dot" style="background:#001A4D"></span> 100%: #001A4D</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gradient B -->
+        <div class="gradient-card">
+            <div class="token-name" style="margin-bottom: 8px;">
+                <strong>Gradient/Hero-Blue</strong>
+                <span class="table-mono">135° (Top-Left ke Bottom-Right)</span>
+            </div>
+            <div class="gradient-bar" style="background: linear-gradient(135deg, #2782C9 0%, #1B6EBB 50%, #0F477E 100%);"></div>
+            <div class="gradient-details">
+                <span class="swatch-desc">Digunakan pada: Hero utama beranda dan panel kiri halaman Login (Login pakai #1561A8 dan #0A2F5C).</span>
+                <div class="gradient-stops">
+                    <span class="stop-pill" onclick="copyHex('#2782C9')"><span class="stop-dot" style="background:#2782C9"></span> 0%: #2782C9</span>
+                    <span class="stop-pill" onclick="copyHex('#1B6EBB')"><span class="stop-dot" style="background:#1B6EBB"></span> 50%: #1B6EBB</span>
+                    <span class="stop-pill" onclick="copyHex('#0F477E')"><span class="stop-dot" style="background:#0F477E"></span> 100%: #0F477E</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gradient C -->
+        <div class="gradient-card">
+            <div class="token-name" style="margin-bottom: 8px;">
+                <strong>Gradient/Overlay-TextHero</strong>
+                <span class="table-mono">90° (Left to Right)</span>
+            </div>
+            <div class="gradient-bar" style="background: linear-gradient(90deg, rgba(25, 97, 165, 0.95) 0%, rgba(25, 97, 165, 0.5) 50%, rgba(25, 97, 165, 0) 100%);"></div>
+            <div class="gradient-details">
+                <span class="swatch-desc">Digunakan pada: Lapisan di balik judul hero beranda agar teks putih mudah dibaca di atas foto.</span>
+                <div class="gradient-stops">
+                    <span class="stop-pill">0%: #1961A5 (95%)</span>
+                    <span class="stop-pill">100%: Transparent</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Semantic & Feedback -->
+    <section>
+        <div class="section-header">
+            <h2>3. Semantic & Feedback Tokens</h2>
+            <p>Standar 3 level warna untuk badge status, notifikasi banner, dan pesan feedback.</p>
+        </div>
+
+        <!-- Success -->
+        <div class="badge-preview-row" style="background: #f0fdf4; border: 1px solid #dcfce7;">
+            <div style="flex: 1;">
+                <span class="pill-sample" style="background: #ECFDF5; border-color: #A7F3D0; color: #047857;">● Lunas / Berhasil</span>
+                <span style="margin-left: 12px; font-weight: 600; font-size: 13px; color: #047857;">Feedback/Success</span>
+            </div>
+            <div class="gradient-stops">
+                <span class="stop-pill" onclick="copyHex('#ECFDF5')">Surface: #ECFDF5</span>
+                <span class="stop-pill" onclick="copyHex('#A7F3D0')">Border: #A7F3D0</span>
+                <span class="stop-pill" onclick="copyHex('#047857')">Text: #047857</span>
+            </div>
+        </div>
+
+        <!-- Warning / Pending -->
+        <div class="badge-preview-row" style="background: #fffdf5; border: 1px solid #fef3c7;">
+            <div style="flex: 1;">
+                <span class="pill-sample" style="background: #FFFBEB; border-color: #FDE68A; color: #B45309;">● Pending / Menunggu</span>
+                <span style="margin-left: 12px; font-weight: 600; font-size: 13px; color: #B45309;">Feedback/Warning</span>
+            </div>
+            <div class="gradient-stops">
+                <span class="stop-pill" onclick="copyHex('#FFFBEB')">Surface: #FFFBEB</span>
+                <span class="stop-pill" onclick="copyHex('#FDE68A')">Border: #FDE68A</span>
+                <span class="stop-pill" onclick="copyHex('#B45309')">Text: #B45309</span>
+            </div>
+        </div>
+
+        <!-- Danger / Outage -->
+        <div class="badge-preview-row" style="background: #fff5f5; border: 1px solid #fee2e2;">
+            <div style="flex: 1;">
+                <span class="pill-sample" style="background: #FEF2F2; border-color: #FECACA; color: #DC2626;">● Gangguan Padam / Gagal</span>
+                <span style="margin-left: 12px; font-weight: 600; font-size: 13px; color: #DC2626;">Feedback/Danger</span>
+            </div>
+            <div class="gradient-stops">
+                <span class="stop-pill" onclick="copyHex('#FEF2F2')">Surface: #FEF2F2</span>
+                <span class="stop-pill" onclick="copyHex('#FECACA')">Border: #FECACA</span>
+                <span class="stop-pill" onclick="copyHex('#DC2626')">Text: #DC2626</span>
+                <span class="stop-pill" onclick="copyHex('#EF4444')">Button: #EF4444</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Neutral & Surface -->
+    <section>
+        <div class="section-header">
+            <h2>4. Neutral & Surface Tokens (Slate)</h2>
+            <p>Hierarki warna teks, border pembatas, dan latar belakang kanvas aplikasi.</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Figma Token Name</th>
+                    <th>Hex</th>
+                    <th>Tailwind Class</th>
+                    <th>Penggunaan Utama</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Neutral/Text-Heading</strong></td>
+                    <td class="table-mono"><span class="color-dot-inline" style="background:#0F172A;"></span>#0F172A</td>
+                    <td>slate-900</td>
+                    <td>Judul halaman utama (H1/H2), angka besar, total harga tagihan</td>
+                </tr>
+                <tr>
+                    <td><strong>Neutral/Text-Body</strong></td>
+                    <td class="table-mono"><span class="color-dot-inline" style="background:#1E293B;"></span>#1E293B</td>
+                    <td>slate-800</td>
+                    <td>Teks body utama dan subjudul pada card fitur</td>
+                </tr>
+                <tr>
+                    <td><strong>Neutral/Text-Secondary</strong></td>
+                    <td class="table-mono"><span class="color-dot-inline" style="background:#334155;"></span>#334155</td>
+                    <td>slate-700</td>
+                    <td>Label formulir input, teks tabel, teks deskripsi kartu</td>
+                </tr>
+                <tr>
+                    <td><strong>Neutral/Text-Muted</strong></td>
+                    <td class="table-mono"><span class="color-dot-inline" style="background:#64748B;"></span>#64748B</td>
+                    <td>slate-500</td>
+                    <td>Tanggal berita, keterangan waktu, label penjelas minor</td>
+                </tr>
+                <tr>
+                    <td><strong>Neutral/Text-Disabled</strong></td>
+                    <td class="table-mono"><span class="color-dot-inline" style="background:#94A3B8;"></span>#94A3B8</td>
+                    <td>slate-400</td>
+                    <td>Placeholder input teks, icon pasif</td>
+                </tr>
+                <tr>
+                    <td><strong>Neutral/Border-Default</strong></td>
+                    <td class="table-mono"><span class="color-dot-inline" style="background:#E2E8F0;"></span>#E2E8F0</td>
+                    <td>slate-200</td>
+                    <td>Garis border kartu, pembatas tabel, outline form input</td>
+                </tr>
+                <tr>
+                    <td><strong>Neutral/Border-Subtle</strong></td>
+                    <td class="table-mono"><span class="color-dot-inline" style="background:#F1F5F9;"></span>#F1F5F9</td>
+                    <td>slate-100</td>
+                    <td>Divider tipis, garis grid chart monitoring KWh</td>
+                </tr>
+                <tr>
+                    <td><strong>Neutral/Surface-Canvas</strong></td>
+                    <td class="table-mono"><span class="color-dot-inline" style="background:#F8FAFC;"></span>#F8FAFC</td>
+                    <td>slate-50</td>
+                    <td>Background dasar halaman web dan selang-seling baris tabel</td>
+                </tr>
+                <tr>
+                    <td><strong>Neutral/Surface-Card</strong></td>
+                    <td class="table-mono"><span class="color-dot-inline" style="background:#FFFFFF;"></span>#FFFFFF</td>
+                    <td>white</td>
+                    <td>Background kartu komponen, modal dialog, container form</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- 5. Gamification & Specialty -->
+    <section>
+        <div class="section-header">
+            <h2>5. Loyalty Gamification (PLN Reward Tiers)</h2>
+            <p>Dinamis dari sistem poin pelanggan untuk badge member dan teks nilai poin.</p>
+        </div>
+        <div class="swatch-grid">
+            <div class="swatch-card" onclick="copyHex('#FFD700')">
+                <div class="swatch-preview" style="background: #FFD700;"></div>
+                <div class="swatch-info">
+                    <div class="token-name"><span>Gamification/Tier-Gold</span><span class="copy-hint">Copy</span></div>
+                    <div class="hex-code">#FFD700</div>
+                    <div class="swatch-desc">Member Gold (Poin &ge; 5.000). Warna teks angka poin & badge tier.</div>
+                </div>
+            </div>
+
+            <div class="swatch-card" onclick="copyHex('#C0C0C0')">
+                <div class="swatch-preview" style="background: #C0C0C0;"></div>
+                <div class="swatch-info">
+                    <div class="token-name"><span>Gamification/Tier-Silver</span><span class="copy-hint">Copy</span></div>
+                    <div class="hex-code">#C0C0C0</div>
+                    <div class="swatch-desc">Member Silver (Poin &ge; 2.000). Warna teks angka poin & badge tier.</div>
+                </div>
+            </div>
+
+            <div class="swatch-card" onclick="copyHex('#CD7F32')">
+                <div class="swatch-preview" style="background: #CD7F32;"></div>
+                <div class="swatch-info">
+                    <div class="token-name"><span>Gamification/Tier-Bronze</span><span class="copy-hint">Copy</span></div>
+                    <div class="hex-code">#CD7F32</div>
+                    <div class="swatch-desc">Member Bronze (Poin &lt; 2.000). Warna teks angka poin & badge tier.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Effects, Glow & Shadows -->
+    <section>
+        <div class="section-header">
+            <h2>6. Effects, Glows & Shadows (Figma Specs)</h2>
+            <p>Spesifikasi Drop Shadow dan Glow agar tampilan kartu dan tombol di Figma presisi dengan hasil web.</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Komponen</th>
+                    <th>Tipe Efek</th>
+                    <th>Color & Opacity</th>
+                    <th>Parameter Figma (X, Y, Blur, Spread)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Garis Indikator Menu Navbar</strong></td>
+                    <td>Drop Shadow (Glow)</td>
+                    <td>#FDB813 (50%)</td>
+                    <td class="table-mono">X: 0, Y: 0, Blur: 8px, Spread: 0</td>
+                </tr>
+                <tr>
+                    <td><strong>Kotak Ikon Melayang (Hero)</strong></td>
+                    <td>Drop Shadow (Glow)</td>
+                    <td>#FDB813 (45%)</td>
+                    <td class="table-mono">X: 0, Y: 0, Blur: 20px, Spread: 0</td>
+                </tr>
+                <tr>
+                    <td><strong>Border Melengkung Foto Hero</strong></td>
+                    <td>Stroke / Border</td>
+                    <td>#FDB813 (35%)</td>
+                    <td class="table-mono">Width: 2px, Solid</td>
+                </tr>
+                <tr>
+                    <td><strong>Shadow Panel Foto Hero</strong></td>
+                    <td>Drop Shadow (Ambient)</td>
+                    <td>#FDB813 (12%)</td>
+                    <td class="table-mono">X: -10px, Y: 0, Blur: 40px, Spread: 0</td>
+                </tr>
+                <tr>
+                    <td><strong>Glass Card "Apa itu PLN"</strong></td>
+                    <td>Drop Shadow (Soft Blue)</td>
+                    <td>#003C78 (12%)</td>
+                    <td class="table-mono">X: 0, Y: 8px, Blur: 48px, Spread: 0</td>
+                </tr>
+                <tr>
+                    <td><strong>Chart KWh Monitoring (Line)</strong></td>
+                    <td>Stroke</td>
+                    <td>#00529C (75%)</td>
+                    <td class="table-mono">Width: 2.5px, Curve: Smooth</td>
+                </tr>
+                <tr>
+                    <td><strong>Chart KWh Monitoring (Fill)</strong></td>
+                    <td>Fill Area</td>
+                    <td>#FDB813 (10%)</td>
+                    <td class="table-mono">Solid Fill di bawah garis</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+</div>
+
+<div id="toast">Kode HEX disalin ke clipboard!</div>
+
+<script>
+function copyHex(hex) {
+    navigator.clipboard.writeText(hex).then(() => {
+        const toast = document.getElementById('toast');
+        toast.textContent = hex + ' berhasil disalin!';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 1600);
+    });
+}
+</script>
+
+</body>
+</html>
