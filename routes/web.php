@@ -74,6 +74,21 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('/customers/{customer}', [AdminController::class, 'updateCustomer'])->name('customers.update');
     Route::delete('/customers/{customer}', [AdminController::class, 'deleteCustomer'])->name('customers.delete');
     Route::get('/transactions', [AdminController::class, 'transactions'])->name('transactions');
+
+    // Modul Klasifikasi Tagihan & Tunggakan
+    Route::get('/bills', [AdminController::class, 'bills'])->name('bills');
+
+    // Modul Tiket Gangguan & Dispatch
+    Route::get('/outages', [AdminController::class, 'outages'])->name('outages');
+    Route::post('/outages/{outage}/status', [AdminController::class, 'updateOutageStatus'])->name('outages.status');
+
+    // Modul Audit Meter Mandiri (SwaCAM)
+    Route::get('/meter-readings', [AdminController::class, 'meterReadings'])->name('meter_readings');
+    Route::post('/meter-readings/{meterReading}/verify', [AdminController::class, 'verifyMeterReading'])->name('meter_readings.verify');
+
+    // Pusat Dokumen & Surat Kedinasan (AI-Ready)
+    Route::get('/letters', [AdminController::class, 'letters'])->name('letters');
+    Route::get('/letters/preview', [AdminController::class, 'previewLetter'])->name('letters.preview');
 });
 
 require __DIR__.'/auth.php';
