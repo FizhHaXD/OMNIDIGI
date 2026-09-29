@@ -16,6 +16,7 @@ class Customer extends Model
         'alamat',
         'nomor_telepon',
         'email',
+        'status_aktif',
     ];
 
     public function user(): BelongsTo

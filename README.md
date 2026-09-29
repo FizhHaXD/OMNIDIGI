@@ -190,10 +190,16 @@ Aplikasi dapat dibuka pada browser melalui tautan: `http://127.0.0.1:8000`
 
 ---
 
-## Dokumentasi Lanjutan
+## Dokumentasi Terpadu (docs/)
 
-* **[Panduan Instalasi Lengkap (INSTALLATION.md)](INSTALLATION.md)** — Berisi langkah instalasi mendalam, konfigurasi database MySQL/SQLite, dan solusi kendala teknis (*troubleshooting*).
-* **[Dokumentasi Database & ERD (DATABASE_ERD.md)](DATABASE_ERD.md)** — Berisi detail struktur tabel, tipe data, relasi kunci (*foreign keys*), normalisasi 3NF, dan alur integritas data.
+Seluruh dokumentasi teknis dan panduan operasional proyek telah diorganisir secara terstruktur di dalam direktori [`docs/`](docs/):
+
+* **[Pusat Dokumentasi Step-by-Step (docs/README.md)](docs/README.md)** — Indeks navigasi seluruh dokumen dan alur pemahaman proyek.
+* **[01. Panduan Instalasi (docs/01-INSTALLATION.md)](docs/01-INSTALLATION.md)** — Langkah instalasi mendalam, konfigurasi database MySQL, dan solusi kendala teknis.
+* **[02. Database ERD (docs/02-DATABASE-ERD.md)](docs/02-DATABASE-ERD.md)** — Detail struktur tabel, tipe data, relasi kunci (*foreign keys*), dan normalisasi 3NF.
+* **[03. 50 Data Dummy User (docs/03-DUMMY-USERS.md)](docs/03-DUMMY-USERS.md)** — Daftar 50 akun dummy, 8 skenario pengujian, dan file SQL.
+* **[04. Color Palette & UI Tokens (docs/04-COLOR-PALETTE.md)](docs/04-COLOR-PALETTE.md)** — Panduan warna korporat PLN, gradien, tipografi, dan UI Kit.
+* **[05. Feature Changelog (docs/05-FEATURE-CHANGELOG.md)](docs/05-FEATURE-CHANGELOG.md)** — Catatan perbaikan bug dan penambahan fitur terbaru.
 
 ---
 

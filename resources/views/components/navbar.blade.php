@@ -77,9 +77,22 @@
             </div>
 
             {{-- Right Section --}}
-            <div class="hidden md:flex items-center gap-4">
+            <div class="hidden md:flex items-center gap-3">
+                {{-- Font Switcher Button --}}
+                <button
+                    onclick="window.openFontSwitcherModal()"
+                    type="button"
+                    class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#FDB813]/70 bg-[#FDB813]/15 hover:bg-[#FDB813]/25 text-white transition-all text-xs font-bold shadow-sm hover:scale-105"
+                    title="Uji Coba & Diskusi Font Tim (Klik untuk Memilih Font)"
+                >
+                    <div class="w-4 h-4 rounded-full bg-[#FDB813] text-[#001a4d] flex items-center justify-center text-[9px] font-black">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <span class="text-[#FDB813]">Pilih Font</span>
+                </button>
+
                 {{-- Theme Toggle --}}
-                <button class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors" title="Mode Terang/Gelap">
+                <button class="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors" title="Mode Terang/Gelap">
                     <i class="fas fa-sun text-sm"></i>
                 </button>
                 
@@ -128,6 +141,19 @@
             <a href="{{ route('simulasi') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-50"><i class="fas fa-search w-6 text-center text-[#1B6EBB]"></i> Simulasi</a>
             <a href="{{ route('produk') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-50"><i class="fas fa-building w-6 text-center text-[#1B6EBB]"></i> Produk</a>
             <a href="{{ route('news.index') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-50"><i class="fas fa-newspaper w-6 text-center text-[#1B6EBB]"></i> Berita</a>
+            
+            {{-- Font Switcher Mobile --}}
+            <button
+                onclick="window.openFontSwitcherModal(); document.getElementById('mobile-menu').classList.add('hidden');"
+                type="button"
+                class="w-full flex items-center justify-between px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50"
+            >
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-font w-6 text-center text-[#00529C]"></i>
+                    <span>Uji Coba Font</span>
+                </span>
+                <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-100 text-[#00529C]">Pilih Font</span>
+            </button>
             @auth
                 <a href="{{ route('dashboard') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-50"><i class="fas fa-table-columns w-6 text-center text-[#1B6EBB]"></i> Dashboard</a>
                 <hr class="border-slate-100 my-2">

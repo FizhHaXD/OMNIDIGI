@@ -161,10 +161,32 @@ class ProdukController extends Controller
     }
 
     // Form bayar tagihan
-    public function tagihan()
+    public function tagihan(Request $request)
     {
         $paymentMethods = PaymentMethod::active()->get();
-        return view('produk.tagihan', compact('paymentMethods'));
+        $customer = null;
+        $unpaidBills = collect();
+
+        // 1. Cek dari query parameter 'id_pelanggan'
+        $idPelanggan = $request->query('id_pelanggan');
+        if ($idPelanggan) {
+            $customer = Customer::with(['tariff.category'])
+                ->where('id_pelanggan', $idPelanggan)
+                ->first();
+        } elseif (auth()->check()) {
+            // 2. Jika user login, otomatis ambil customer miliknya
+            $customer = auth()->user()->customers()->with(['tariff.category'])->first();
+        }
+
+        if ($customer) {
+            $unpaidBills = Bill::where('customer_id', $customer->id)
+                ->whereIn('status', ['unpaid', 'overdue'])
+                ->orderByDesc('tahun')
+                ->orderByDesc('bulan')
+                ->get();
+        }
+
+        return view('produk.tagihan', compact('paymentMethods', 'customer', 'unpaidBills'));
     }
 
     // Cek tagihan pelanggan

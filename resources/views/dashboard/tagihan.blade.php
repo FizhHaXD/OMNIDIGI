@@ -41,7 +41,7 @@
                         <p class="text-3xl font-bold mt-1">Rp {{ number_format($totalUnpaid, 0, ',', '.') }}</p>
                         <p class="text-white/60 text-xs mt-1">{{ $unpaid->count() }} tagihan tertunggak</p>
                     </div>
-                    <a href="{{ route('produk.tagihan') }}" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors">
+                    <a href="{{ route('produk.tagihan', ['id_pelanggan' => $customer->id_pelanggan]) }}" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors">
                         Bayar Sekarang <i class="fas fa-arrow-right ml-1.5"></i>
                     </a>
                 </div>
@@ -60,6 +60,7 @@
                                 <th class="px-5 py-3 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Denda</th>
                                 <th class="px-5 py-3 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Jatuh Tempo</th>
                                 <th class="px-5 py-3 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Status</th>
+                                <th class="px-5 py-3 text-right text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-50">
@@ -79,6 +80,15 @@
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-50 text-red-700"><i class="fas fa-exclamation-circle mr-1"></i>Jatuh Tempo</span>
                                     @else
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700"><i class="fas fa-clock mr-1"></i>Belum Bayar</span>
+                                    @endif
+                                </td>
+                                <td class="px-5 py-3.5 text-right">
+                                    @if($bill->status !== 'paid')
+                                        <a href="{{ route('produk.tagihan', ['id_pelanggan' => $customer->id_pelanggan]) }}" class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold bg-[#00529C] hover:bg-[#003d75] text-white shadow-sm transition-all">
+                                            <i class="fas fa-credit-card mr-1"></i> Bayar
+                                        </a>
+                                    @else
+                                        <span class="text-xs text-slate-400 font-medium"><i class="fas fa-check text-emerald-500 mr-1"></i> Selesai</span>
                                     @endif
                                 </td>
                             </tr>

@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
 
     // PLN Reward
     Route::get('/dashboard/reward', [RewardController::class, 'index'])->name('dashboard.reward');
+    Route::post('/dashboard/reward/redeem', [RewardController::class, 'redeem'])->name('dashboard.reward.redeem');
 
     // Pembayaran
     Route::post('/produk/bayar', [ProdukController::class, 'bayar'])->name('produk.bayar');

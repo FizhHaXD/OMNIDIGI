@@ -56,43 +56,89 @@
             </div>
             @endif
 
-            {{-- Form Self Metering --}}
-            <div class="card p-6">
-                <h2 class="text-lg font-bold text-slate-900 mb-1">Input Baca Meteran</h2>
-                <p class="text-sm text-slate-500 mb-5">Masukkan angka yang tertera di meteran listrik Anda saat ini.</p>
-
-                <form method="POST" action="{{ route('dashboard.metering.store') }}">
-                    @csrf
-                    <div class="mb-5">
-                        <label for="meteran_akhir" class="block text-sm font-medium text-slate-700 mb-1.5">Angka Meteran Saat Ini</label>
-                        <input type="number" name="meteran_akhir" id="meteran_akhir"
-                               class="form-input w-full text-lg font-mono"
-                               placeholder="{{ $lastReading ? 'Harus lebih dari ' . number_format($lastReading->meteran_akhir, 0, ',', '.') : 'Masukkan angka meteran' }}"
-                               min="{{ $lastReading ? $lastReading->meteran_akhir + 1 : 0 }}" required>
-                        @error('meteran_akhir')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+            {{-- Status Jika Sudah Lapor Bulan Ini --}}
+            @if($currentMonthReading)
+            <div class="card p-6 mb-6 border-emerald-200 bg-emerald-50/50">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-check-circle text-emerald-600 text-xl"></i>
                     </div>
-
-                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-5">
-                        <div class="flex gap-2">
-                            <i class="fas fa-info-circle text-amber-500 mt-0.5"></i>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between mb-1">
+                            <h3 class="font-bold text-slate-800 text-base">Laporan Bulan Ini Telah Diterima</h3>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold
+                                {{ $currentMonthReading->status === 'billed' ? 'bg-blue-100 text-blue-800' : ($currentMonthReading->status === 'verified' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800') }}">
+                                @if($currentMonthReading->status === 'billed')
+                                    <i class="fas fa-file-invoice mr-1"></i> Tagihan Terbit
+                                @elseif($currentMonthReading->status === 'verified')
+                                    <i class="fas fa-badge-check mr-1"></i> Terverifikasi
+                                @else
+                                    <i class="fas fa-clock mr-1"></i> Menunggu Verifikasi
+                                @endif
+                            </span>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-3">
+                            Anda sudah melaporkan stand meter untuk periode <strong>{{ $currentMonthReading->nama_bulan }} {{ $currentMonthReading->tahun }}</strong>.
+                        </p>
+                        <div class="grid grid-cols-3 gap-3 bg-white p-3 rounded-xl border border-emerald-100 text-center">
                             <div>
-                                <p class="text-sm text-amber-800 font-medium">Tips Self Metering</p>
-                                <ul class="text-xs text-amber-700 mt-1 space-y-0.5">
-                                    <li>• Pastikan membaca angka meteran dari kiri ke kanan</li>
-                                    <li>• Abaikan angka berwarna merah (desimal)</li>
-                                    <li>• Laporkan sebelum tanggal 25 setiap bulan</li>
-                                </ul>
+                                <p class="text-[10px] text-slate-400 uppercase">Stand Awal</p>
+                                <p class="text-xs font-mono font-semibold text-slate-700">{{ number_format($currentMonthReading->meteran_awal, 0, ',', '.') }}</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 uppercase">Stand Akhir</p>
+                                <p class="text-xs font-mono font-semibold text-slate-900">{{ number_format($currentMonthReading->meteran_akhir, 0, ',', '.') }}</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 uppercase">Pemakaian</p>
+                                <p class="text-xs font-semibold text-emerald-600">{{ number_format($currentMonthReading->meteran_akhir - $currentMonthReading->meteran_awal, 0, ',', '.') }} kWh</p>
                             </div>
                         </div>
+                        <p class="text-xs text-slate-400 mt-3">
+                            <i class="fas fa-calendar-alt mr-1 text-[#00529C]"></i> Pelaporan periode berikutnya dibuka pada tanggal <strong>24–27 {{ now()->addMonth()->translatedFormat('F Y') }}</strong>.
+                        </p>
                     </div>
-
-                    <button type="submit" class="btn-primary w-full">
-                        <i class="fas fa-paper-plane mr-2"></i> Kirim Pembacaan
-                    </button>
-                </form>
+                </div>
             </div>
+            @else
+                {{-- Form Self Metering --}}
+                <div class="card p-6">
+                    <h2 class="text-lg font-bold text-slate-900 mb-1">Input Baca Meteran</h2>
+                    <p class="text-sm text-slate-500 mb-5">Masukkan angka yang tertera di meteran listrik Anda saat ini.</p>
+
+                    <form method="POST" action="{{ route('dashboard.metering.store') }}">
+                        @csrf
+                        <div class="mb-5">
+                            <label for="meteran_akhir" class="block text-sm font-medium text-slate-700 mb-1.5">Angka Meteran Saat Ini</label>
+                            <input type="number" name="meteran_akhir" id="meteran_akhir"
+                                   class="form-input w-full text-lg font-mono"
+                                   placeholder="{{ $lastReading ? 'Harus lebih dari ' . number_format($lastReading->meteran_akhir, 0, ',', '.') : 'Masukkan angka meteran' }}"
+                                   min="{{ $lastReading ? $lastReading->meteran_akhir + 1 : 0 }}" required>
+                            @error('meteran_akhir')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-5">
+                            <div class="flex gap-2">
+                                <i class="fas fa-info-circle text-amber-500 mt-0.5"></i>
+                                <div>
+                                    <p class="text-sm text-amber-800 font-medium">Tips Self Metering</p>
+                                    <ul class="text-xs text-amber-700 mt-1 space-y-0.5">
+                                        <li>• Pastikan membaca angka meteran dari kiri ke kanan</li>
+                                        <li>• Abaikan angka berwarna merah (desimal)</li>
+                                        <li>• Laporkan sebelum tanggal 25 setiap bulan</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary w-full">
+                            <i class="fas fa-paper-plane mr-2"></i> Kirim Pembacaan
+                        </button>
+                    </form>
+                </div>
+            @endif
         @endif
     </div>
 </section>

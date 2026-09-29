@@ -15,22 +15,41 @@
 <section class="py-8 md:py-10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        @if(!$customer)
-            <div class="card p-10 text-center">
-                <i class="fas fa-exclamation-circle text-amber-400 text-3xl mb-3"></i>
-                <p class="text-slate-600">Anda belum memiliki data pelanggan PLN.</p>
-            </div>
-        @elseif(empty($chartData['labels']))
+        @if(empty($chartData['labels']))
             <div class="card p-10 text-center">
                 <div class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
                     <i class="fas fa-chart-line text-indigo-300 text-xl"></i>
                 </div>
-                <p class="text-slate-400 text-sm">Belum ada data pemakaian untuk ditampilkan.</p>
+                <p class="text-slate-700 font-semibold text-base">Belum ada data pemakaian atau transaksi</p>
+                <p class="text-slate-400 text-xs mt-1">Data grafik akan terisi otomatis setelah Anda melakukan pembayaran tagihan listrik, pembelian token, atau pelaporan baca meter.</p>
             </div>
         @else
+            {{-- Info Ringkasan Pelanggan --}}
+            @if($customer)
+            <div class="card p-4 mb-6 bg-slate-50 border-slate-200 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-[#00529C]/10 flex items-center justify-center text-[#00529C]">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400">ID Pelanggan</p>
+                        <p class="text-sm font-bold font-mono text-slate-800">{{ $customer->id_pelanggan }} <span class="text-xs font-normal text-slate-500">({{ $customer->tariff->kode ?? '-' }} / {{ number_format($customer->tariff->daya_va ?? 0) }} VA)</span></p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <i class="fas fa-check-circle mr-1"></i> Data Terintegrasi
+                    </span>
+                </div>
+            </div>
+            @endif
+
             {{-- Grafik Konsumsi kWh --}}
             <div class="card p-6 mb-6">
-                <h2 class="text-lg font-bold text-slate-900 mb-4">Konsumsi Listrik (kWh)</h2>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-bold text-slate-900">Konsumsi Listrik (kWh)</h2>
+                    <span class="text-xs text-slate-400 font-medium">Satuan Kilowatt-hour</span>
+                </div>
                 <div style="height: 320px;">
                     <canvas id="chartKwh"></canvas>
                 </div>
@@ -39,7 +58,10 @@
             {{-- Grafik Biaya --}}
             @if(!empty($chartData['biaya']))
             <div class="card p-6 mb-6">
-                <h2 class="text-lg font-bold text-slate-900 mb-4">Biaya Tagihan (Rupiah)</h2>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-bold text-slate-900">Biaya Listrik (Rupiah)</h2>
+                    <span class="text-xs text-slate-400 font-medium">Tagihan & Token</span>
+                </div>
                 <div style="height: 320px;">
                     <canvas id="chartBiaya"></canvas>
                 </div>
@@ -76,7 +98,7 @@
 </section>
 
 {{-- Chart.js via CDN --}}
-@if($customer && !empty($chartData['labels']))
+@if(!empty($chartData['labels']))
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script>
     const labels = @json($chartData['labels']);
@@ -99,9 +121,16 @@
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
+            plugins: { 
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => 'Konsumsi: ' + ctx.parsed.y.toLocaleString('id-ID') + ' kWh'
+                    }
+                }
+            },
             scales: {
-                y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+                y: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { callback: v => v + ' kWh' } },
                 x: { grid: { display: false } }
             }
         }
@@ -112,7 +141,7 @@
     new Chart(document.getElementById('chartBiaya'), {
         type: 'line',
         data: {
-            labels: labels.slice(0, @json(count($chartData['biaya']))),
+            labels: labels,
             datasets: [{
                 label: 'Biaya (Rp)',
                 data: @json($chartData['biaya']),
@@ -128,7 +157,14 @@
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
+            plugins: { 
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => 'Biaya: Rp ' + ctx.parsed.y.toLocaleString('id-ID')
+                    }
+                }
+            },
             scales: {
                 y: { beginAtZero: true, grid: { color: '#f1f5f9' },
                      ticks: { callback: v => 'Rp ' + v.toLocaleString('id-ID') } },

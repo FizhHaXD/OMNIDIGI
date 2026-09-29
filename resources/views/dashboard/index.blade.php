@@ -58,6 +58,44 @@
         </div>
         @endif
 
+        {{-- Card Token Terakhir (Jika Ada) --}}
+        @if($lastToken && $lastToken->token_listrik)
+        <div class="card p-6 mb-8 border-l-4 border-l-[#FDB813] bg-gradient-to-r from-amber-50/60 via-white to-amber-50/30 shadow-md">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-[#FDB813]/25 flex items-center justify-center text-[#9E6E00] flex-shrink-0 shadow-sm">
+                        <i class="fas fa-bolt text-xl text-[#FDB813]"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded text-[10px] font-bold bg-[#FDB813]/25 text-[#9E6E00] uppercase tracking-wider">
+                                <i class="fas fa-receipt mr-1"></i> Token Listrik Terakhir
+                            </span>
+                            <span class="text-xs text-slate-400">{{ $lastToken->created_at->format('d M Y, H:i') }} WIB</span>
+                        </div>
+                        <p class="text-xs text-slate-500">
+                            No. Meter / ID Pelanggan: <strong class="font-mono text-slate-800">{{ $lastToken->no_meter }}</strong> · 
+                            Nominal: <strong class="text-slate-800">Rp {{ number_format($lastToken->amount, 0, ',', '.') }}</strong>
+                        </p>
+                    </div>
+                </div>
+
+                {{-- 20 Digit Token & Tombol Salin --}}
+                <div class="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <div>
+                        <p class="text-[10px] text-slate-400 uppercase font-semibold">20 Digit Kode Stroom</p>
+                        <p class="text-xl md:text-2xl font-extrabold font-mono tracking-widest text-[#00529C]">{{ $lastToken->token_listrik }}</p>
+                    </div>
+                    <button type="button" onclick="copyDashboardToken('{{ $lastToken->token_listrik }}', this)"
+                            class="px-4 py-2.5 bg-[#00529C] hover:bg-[#003d75] text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow transition-all whitespace-nowrap" title="Salin Kode Token">
+                        <i class="far fa-copy text-sm"></i>
+                        <span>Salin</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        @endif
+
         {{-- Grid Menu Fitur (4x2) --}}
         <h2 class="text-lg font-bold text-slate-900 mb-5">Layanan</h2>
         <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-4 mb-10">
@@ -177,4 +215,18 @@
 
     </div>
 </section>
+
+<script>
+function copyDashboardToken(code, btn) {
+    navigator.clipboard.writeText(code).then(() => {
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check text-emerald-400"></i> <span>Tersalin!</span>';
+        btn.classList.add('bg-emerald-600');
+        setTimeout(() => {
+            btn.innerHTML = originalHtml;
+            btn.classList.remove('bg-emerald-600');
+        }, 2000);
+    });
+}
+</script>
 @endsection
