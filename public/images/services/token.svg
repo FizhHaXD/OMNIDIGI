@@ -1,45 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <defs>
-    <linearGradient id="bg-amber" x1="10" y1="10" x2="110" y2="110" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#FDB813"/>
-      <stop offset="100%" stop-color="#D97706"/>
-    </linearGradient>
-    <linearGradient id="token-card" x1="25" y1="35" x2="95" y2="85" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#00265a"/>
-      <stop offset="100%" stop-color="#00529C"/>
-    </linearGradient>
-    <linearGradient id="gold-key" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#FFF275"/>
-      <stop offset="100%" stop-color="#FDB813"/>
-    </linearGradient>
-    <filter id="shadow-token" x="-10%" y="-10%" width="130%" height="130%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#D97706" flood-opacity="0.25"/>
-    </filter>
-  </defs>
-  <!-- Background Badge -->
-  <rect x="10" y="10" width="100" height="100" rx="28" fill="url(#bg-amber)" opacity="0.12"/>
-  <circle cx="60" cy="60" r="44" fill="#FDB813" opacity="0.08"/>
-  <!-- Smart Card / Voucher -->
-  <g filter="url(#shadow-token)">
-    <rect x="24" y="32" width="72" height="46" rx="10" fill="url(#token-card)"/>
-    <!-- Chip -->
-    <rect x="34" y="42" width="14" height="11" rx="3" fill="url(#gold-key)"/>
-    <path d="M41 42v11M34 47h14" stroke="#B45309" stroke-width="0.7"/>
-    <!-- Contactless wave -->
-    <path d="M54 44a8 8 0 0 1 0 8M58 41a13 13 0 0 1 0 14" stroke="#93C5FD" stroke-width="1.2" stroke-linecap="round"/>
-    <!-- 20-digit code mockup dots -->
-    <circle cx="34" cy="66" r="1.5" fill="#FDB813"/>
-    <circle cx="40" cy="66" r="1.5" fill="#FDB813"/>
-    <circle cx="46" cy="66" r="1.5" fill="#FDB813"/>
-    <circle cx="52" cy="66" r="1.5" fill="#FDB813"/>
-    <circle cx="60" cy="66" r="1.5" fill="#FFFFFF"/>
-    <circle cx="66" cy="66" r="1.5" fill="#FFFFFF"/>
-    <circle cx="72" cy="66" r="1.5" fill="#FFFFFF"/>
-    <circle cx="78" cy="66" r="1.5" fill="#FFFFFF"/>
-  </g>
-  <!-- Floating Lightning Bolt Energy Token -->
-  <g filter="url(#shadow-token)">
-    <circle cx="78" cy="74" r="18" fill="url(#gold-key)"/>
-    <path d="M79 63l-8 12h7l-3 11 11-14h-7l5-9h-5z" fill="#001a4d"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Soft Background Container -->
+  <rect width="64" height="64" rx="16" fill="#FEF9C3"/>
+  <!-- Prepaid Smart Card -->
+  <rect x="12" y="18" width="40" height="28" rx="5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.5"/>
+  <!-- Magnetic stripe / top bar -->
+  <rect x="12" y="24" width="40" height="6" fill="#FDE68A"/>
+  <!-- Smart chip -->
+  <rect x="18" y="34" width="9" height="7" rx="1.5" fill="#F59E0B" stroke="#B45309" stroke-width="1"/>
+  <!-- Clean authentic PLN Lightning Bolt -->
+  <circle cx="44" cy="38" r="10" fill="#00529C"/>
+  <path d="M45 31l-4.5 7h4l-2 6 6.5-8h-4.5l3.5-5h-3z" fill="#FDB813" stroke="#FDB813" stroke-width="0.5" stroke-linejoin="round"/>
 </svg>

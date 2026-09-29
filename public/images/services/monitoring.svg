@@ -1,47 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <defs>
-    <linearGradient id="bg-indigo" x1="10" y1="10" x2="110" y2="110" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#6366F1"/>
-      <stop offset="100%" stop-color="#4338CA"/>
-    </linearGradient>
-    <linearGradient id="chart-card" x1="25" y1="25" x2="95" y2="95" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#EEF2FF"/>
-    </linearGradient>
-    <linearGradient id="bar-cyan" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#06B6D4"/>
-      <stop offset="100%" stop-color="#0284C7"/>
-    </linearGradient>
-    <linearGradient id="bar-indigo" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#818CF8"/>
-      <stop offset="100%" stop-color="#4F46E5"/>
-    </linearGradient>
-    <filter id="shadow-chart" x="-10%" y="-10%" width="130%" height="130%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#4338CA" flood-opacity="0.2"/>
-    </filter>
-  </defs>
-  <!-- Background Badge -->
-  <rect x="10" y="10" width="100" height="100" rx="28" fill="url(#bg-indigo)" opacity="0.12"/>
-  <circle cx="60" cy="60" r="44" fill="#6366F1" opacity="0.08"/>
-  <!-- Analytics Glass Display -->
-  <g filter="url(#shadow-chart)">
-    <rect x="25" y="28" width="70" height="64" rx="12" fill="url(#chart-card)"/>
-    <rect x="25" y="28" width="70" height="64" rx="12" stroke="#E0E7FF" stroke-width="1.5"/>
-    <!-- Grid Lines -->
-    <path d="M33 46h54M33 58h54M33 70h54" stroke="#E0E7FF" stroke-width="1" stroke-dasharray="2 2"/>
-    <!-- Histogram Bars -->
-    <rect x="36" y="54" width="8" height="24" rx="3" fill="#C7D2FE"/>
-    <rect x="48" y="44" width="8" height="34" rx="3" fill="url(#bar-cyan)"/>
-    <rect x="60" y="38" width="8" height="40" rx="3" fill="url(#bar-indigo)"/>
-    <rect x="72" y="48" width="8" height="30" rx="3" fill="#818CF8"/>
-    <!-- Growth Line Graph -->
-    <path d="M40 56l12-10 12-8 12 12" stroke="#FDB813" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="52" cy="46" r="3" fill="#FDB813" stroke="#FFFFFF" stroke-width="1.5"/>
-    <circle cx="64" cy="38" r="3" fill="#FDB813" stroke="#FFFFFF" stroke-width="1.5"/>
-  </g>
-  <!-- Floating Sparkle Badge -->
-  <g filter="url(#shadow-chart)">
-    <circle cx="82" cy="32" r="14" fill="#00529C"/>
-    <path d="M82 25l2.2 4.8 5.3.8-3.8 3.7.9 5.2-4.6-2.4-4.6 2.4.9-5.2-3.8-3.7 5.3-.8L82 25z" fill="#FDB813"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Soft Background Container -->
+  <rect width="64" height="64" rx="16" fill="#EEF2FF"/>
+  <!-- Analytics Chart Plate -->
+  <rect x="13" y="14" width="38" height="36" rx="5" fill="#FFFFFF" stroke="#4F46E5" stroke-width="2.5"/>
+  <!-- Chart Bars -->
+  <rect x="19" y="32" width="4" height="12" rx="1" fill="#C7D2FE"/>
+  <rect x="26" y="26" width="4" height="18" rx="1" fill="#818CF8"/>
+  <rect x="33" y="21" width="4" height="23" rx="1" fill="#4F46E5"/>
+  <!-- Trend Line -->
+  <path d="M18 30l7-5 7-4 9 4" stroke="#FDB813" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Upward Arrow Badge -->
+  <circle cx="44" cy="42" r="10" fill="#00529C"/>
+  <path d="M41 43l3-3 3 3m-3-3v6" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

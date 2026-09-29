@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" fill="none">
+  <defs>
+    <linearGradient id="bg-banner" x1="0" y1="0" x2="600" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#001a4d"/>
+      <stop offset="60%" stop-color="#00265a"/>
+      <stop offset="100%" stop-color="#00529C"/>
+    </linearGradient>
+    <linearGradient id="meter-front" x1="380" y1="50" x2="520" y2="250" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="300" fill="url(#bg-banner)"/>
+
+  <!-- Subtle Blueprint Grid Lines -->
+  <g stroke="#ffffff" stroke-opacity="0.06" stroke-width="1">
+    <line x1="0" y1="50" x2="600" y2="50"/>
+    <line x1="0" y1="100" x2="600" y2="100"/>
+    <line x1="0" y1="150" x2="600" y2="150"/>
+    <line x1="0" y1="200" x2="600" y2="200"/>
+    <line x1="0" y1="250" x2="600" y2="250"/>
+    <line x1="100" y1="0" x2="100" y2="300"/>
+    <line x1="200" y1="0" x2="200" y2="300"/>
+    <line x1="300" y1="0" x2="300" y2="300"/>
+    <line x1="400" y1="0" x2="400" y2="300"/>
+    <line x1="500" y1="0" x2="500" y2="300"/>
+  </g>
+
+  <!-- Left Side: Clean Typography & Badge -->
+  <g transform="translate(45, 65)">
+    <!-- Small Category Badge -->
+    <rect width="135" height="24" rx="12" fill="#FDB813"/>
+    <text x="14" y="16" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="900" fill="#001a4d" letter-spacing="0.5">SMART GRID 2026</text>
+    
+    <!-- Title -->
+    <text x="0" y="60" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="800" fill="#FFFFFF">KWh Meter Pintar</text>
+    <text x="0" y="88" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="700" fill="#FDB813">Advanced Metering (AMI)</text>
+    
+    <!-- Short Info -->
+    <text x="0" y="122" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#94A3B8">Pencatatan konsumsi otomatis, akurat,</text>
+    <text x="0" y="140" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#94A3B8">dan realtime tanpa kunjungan petugas.</text>
+
+    <!-- Key metric chip -->
+    <g transform="translate(0, 160)">
+      <rect width="180" height="28" rx="6" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-opacity="0.15"/>
+      <circle cx="16" cy="14" r="4" fill="#10B981"/>
+      <text x="28" y="18" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600" fill="#E2E8F0">Jaringan 24/7 Stabil</text>
+    </g>
+  </g>
+
+  <!-- Right Side: Clean Vector Smart Meter -->
+  <g transform="translate(370, 45)">
+    <!-- Outer Case -->
+    <rect width="160" height="210" rx="18" fill="url(#meter-front)" stroke="#334155" stroke-width="3"/>
+    <rect x="10" y="10" width="140" height="190" rx="12" stroke="#1E293B" stroke-width="2"/>
+
+    <!-- PLN Logo Badge on Meter -->
+    <rect x="25" y="24" width="22" height="20" rx="4" fill="#00529C"/>
+    <path d="M36 26l-4 7h3.5l-2 5 6-6h-3.5l3-4h-3z" fill="#FDB813"/>
+    <text x="54" y="38" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="800" fill="#FFFFFF" letter-spacing="1">PLN DIGI</text>
+
+    <!-- LCD Display -->
+    <rect x="25" y="55" width="110" height="55" rx="8" fill="#022C22" stroke="#065F46" stroke-width="1.5"/>
+    <text x="35" y="85" font-family="monospace" font-size="19" font-weight="bold" fill="#34D399" letter-spacing="1">04892.4</text>
+    <text x="105" y="100" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="bold" fill="#10B981">kWh</text>
+
+    <!-- Mini Analytics Bar inside LCD -->
+    <g transform="translate(35, 92)" fill="#059669">
+      <rect x="0" y="3" width="4" height="6" rx="1"/>
+      <rect x="6" y="1" width="4" height="8" rx="1"/>
+      <rect x="12" y="4" width="4" height="5" rx="1"/>
+      <rect x="18" y="0" width="4" height="9" rx="1" fill="#34D399"/>
+      <rect x="24" y="2" width="4" height="7" rx="1"/>
+    </g>
+
+    <!-- Keypad Buttons -->
+    <g transform="translate(25, 125)">
+      <circle cx="15" cy="12" r="7" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+      <circle cx="37" cy="12" r="7" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+      <circle cx="59" cy="12" r="7" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+      <circle cx="81" cy="12" r="7" fill="#FDB813"/>
+      <!-- Enter icon on yellow key -->
+      <path d="M79 12h4m0 0l-2-2m2 2l-2 2" stroke="#001a4d" stroke-width="1.2" stroke-linecap="round"/>
+
+      <circle cx="15" cy="32" r="7" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+      <circle cx="37" cy="32" r="7" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+      <circle cx="59" cy="32" r="7" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+      <circle cx="81" cy="32" r="7" fill="#10B981"/>
+    </g>
+
+    <!-- Optical Port / Status LED -->
+    <circle cx="38" cy="180" r="3.5" fill="#EF4444"/>
+    <circle cx="50" cy="180" r="3.5" fill="#FDB813"/>
+    <circle cx="62" cy="180" r="3.5" fill="#10B981"/>
+    <circle cx="110" cy="180" r="8" fill="#1E293B" stroke="#475569" stroke-width="1.5"/>
+  </g>
+</svg>

@@ -52,8 +52,10 @@
 
                 {{-- Status Daya Jaringan --}}
                 <div class="bg-white/10 backdrop-blur-md px-5 py-3.5 rounded-2xl border border-white/15 shadow-md flex items-center gap-3.5">
-                    <div class="w-11 h-11 rounded-xl bg-cyan-500/25 text-cyan-300 flex items-center justify-center font-black text-xl shadow-xs">
-                        <i class="fas fa-bolt"></i>
+                    <div class="w-11 h-11 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center shadow-xs">
+                        <svg class="w-6 h-6 text-cyan-300" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
                     </div>
                     <div>
                         <p class="text-[11px] font-bold text-white/70 uppercase tracking-wider">Tegangan Jaringan</p>
@@ -157,8 +159,10 @@
                 <div class="card p-5 sm:p-6 border-l-4 border-l-[#FDB813] bg-gradient-to-r from-amber-50/70 via-white to-amber-50/30 shadow-md rounded-3xl border border-slate-200/80">
                     <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
                         <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-2xl bg-[#FDB813]/25 flex items-center justify-center text-[#9E6E00] flex-shrink-0 shadow-xs">
-                                <i class="fas fa-bolt text-2xl text-[#FDB813]"></i>
+                            <div class="w-14 h-14 rounded-2xl bg-amber-500/15 flex items-center justify-center text-amber-700 flex-shrink-0 border border-amber-200/60 shadow-xs">
+                                <svg class="w-7 h-7 text-[#FDB813]" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
                             </div>
                             <div>
                                 <div class="flex flex-wrap items-center gap-2 mb-1">
@@ -601,14 +605,10 @@
                     <p class="text-xs sm:text-sm text-slate-500 font-medium">Inovasi kelistrikan ramah lingkungan dan edukasi PLN</p>
                 </div>
 
-                {{-- Promo Banner Card with Generated 3D Asset --}}
+                {{-- Promo Banner Card with Clean Vector SVG Asset --}}
                 <div class="card overflow-hidden border border-slate-200 shadow-lg rounded-3xl group bg-white">
-                    <div class="relative h-52 overflow-hidden bg-slate-900">
-                        <img src="{{ asset('images/banner_pln_promo.jpg') }}" alt="PLN Smart Grid" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent"></div>
-                        <span class="absolute top-4 left-4 px-3 py-1 rounded-lg bg-[#FDB813] text-[#001a4d] text-xs font-black uppercase tracking-wider shadow-sm">
-                            Smart Grid 2026
-                        </span>
+                    <div class="relative h-52 overflow-hidden bg-[#001a4d]">
+                        <img src="{{ asset('images/smart_meter_banner.svg') }}" alt="PLN Smart Grid AMI" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-6 bg-white">
                         <h4 class="text-base sm:text-lg font-black text-slate-900 mb-1.5 group-hover:text-[#00529C] transition-colors leading-tight">

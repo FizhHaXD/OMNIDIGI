@@ -1,39 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <defs>
-    <linearGradient id="bg-reward" x1="10" y1="10" x2="110" y2="110" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#F59E0B"/>
-      <stop offset="100%" stop-color="#D97706"/>
-    </linearGradient>
-    <linearGradient id="box-gold" x1="30" y1="40" x2="90" y2="90" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#FDB813"/>
-      <stop offset="100%" stop-color="#EAB308"/>
-    </linearGradient>
-    <linearGradient id="ribbon-blue" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#00529C"/>
-      <stop offset="100%" stop-color="#00265a"/>
-    </linearGradient>
-    <filter id="shadow-reward" x="-10%" y="-10%" width="130%" height="130%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#D97706" flood-opacity="0.25"/>
-    </filter>
-  </defs>
-  <!-- Background Badge -->
-  <rect x="10" y="10" width="100" height="100" rx="28" fill="url(#bg-reward)" opacity="0.12"/>
-  <circle cx="60" cy="60" r="44" fill="#F59E0B" opacity="0.08"/>
-  <!-- Gift Box -->
-  <g filter="url(#shadow-reward)">
-    <!-- Main Box Body -->
-    <rect x="32" y="48" width="56" height="44" rx="8" fill="url(#box-gold)"/>
-    <!-- Lid -->
-    <rect x="28" y="42" width="64" height="12" rx="4" fill="#FEF08A"/>
-    <!-- Ribbon Vertical -->
-    <rect x="54" y="42" width="12" height="50" fill="url(#ribbon-blue)"/>
-    <!-- Ribbon Bow -->
-    <path d="M52 38c-8-8-14 2-4 7l12-3c10-5 4-15-4-7l-4 3z" fill="url(#ribbon-blue)"/>
-    <circle cx="60" cy="40" r="3.5" fill="#FDB813"/>
-  </g>
-  <!-- Floating Star / Gem Coin -->
-  <g filter="url(#shadow-reward)">
-    <circle cx="82" cy="32" r="14" fill="#00529C"/>
-    <polygon points="82,23 85,29 91,30 87,34 88,40 82,37 76,40 77,34 73,30 79,29" fill="#FDB813"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Soft Background Container -->
+  <rect width="64" height="64" rx="16" fill="#FFFBEB"/>
+  <!-- Gift Box Body -->
+  <rect x="16" y="27" width="32" height="23" rx="4" fill="#FFFFFF" stroke="#D97706" stroke-width="2.5"/>
+  <!-- Lid -->
+  <rect x="13" y="21" width="38" height="7" rx="2" fill="#FDE68A" stroke="#D97706" stroke-width="2"/>
+  <!-- Vertical Ribbon -->
+  <rect x="29" y="21" width="6" height="29" fill="#00529C"/>
+  <!-- Ribbon Bow -->
+  <path d="M28 17c-3-3-6 1-2 4l6-1c4-2 2-7-2-3l-2 1z" fill="#00529C"/>
+  <!-- Gold Star Reward Token Badge -->
+  <circle cx="44" cy="22" r="10" fill="#FDB813"/>
+  <polygon points="44,16 46,20.5 51,21 47.5,24.5 48.5,29.5 44,27 39.5,29.5 40.5,24.5 37,21 42,20.5" fill="#001a4d"/>
 </svg>
