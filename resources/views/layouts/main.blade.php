@@ -8,6 +8,11 @@
 
     <title>@yield('title', 'PLN DIGI - Layanan Listrik Digital')</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
     <!-- Google Fonts (Plus Jakarta Sans, Montserrat, Rubik, Lato, Merriweather, Oswald) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -10,11 +10,11 @@
     </div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8">
             
             {{-- User Greeting & Status --}}
             <div class="flex items-center gap-4 sm:gap-5">
-                <div class="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-xl flex-shrink-0 overflow-hidden">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-xl flex-shrink-0 overflow-hidden">
                     @if($user->avatar_url)
                         <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
                     @else
@@ -22,7 +22,7 @@
                     @endif
                 </div>
                 <div>
-                    <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
                         <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-xs">
                             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sambungan Aktif
                         </span>
@@ -33,39 +33,45 @@
                     <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-tight">
                         Selamat Datang, {{ $user->name }}
                     </h1>
-                    <p class="text-white/70 text-sm sm:text-base mt-1 font-medium">
+                    <p class="text-white/70 text-sm sm:text-base mt-1.5 font-normal leading-relaxed max-w-xl">
                         Pusat kendali layanan listrik digital, pemantauan konsumsi daya, dan transaksi terpadu PLN.
                     </p>
                 </div>
             </div>
 
             {{-- Quick Stats Ribbon --}}
-            <div class="flex flex-wrap items-center gap-3">
+            <div class="flex flex-wrap sm:flex-nowrap items-center gap-3.5 flex-shrink-0">
                 {{-- PLN Point Card --}}
-                <a href="{{ route('dashboard.reward') }}" class="group bg-white/10 hover:bg-white/15 backdrop-blur-md px-4.5 py-3 rounded-2xl border border-white/15 transition-all shadow-md flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-[#FDB813] text-[#001a4d] flex items-center justify-center font-black text-lg shadow-xs group-hover:scale-105 transition-transform">
+                <a href="{{ route('dashboard.reward') }}" class="group bg-white/10 hover:bg-white/15 backdrop-blur-md px-5 py-3.5 rounded-2xl border border-white/15 transition-all shadow-md flex items-center gap-3.5 relative overflow-hidden flex-shrink-0">
+                    <div class="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-[#FDB813]/15 pointer-events-none"></div>
+                    <div class="w-11 h-11 rounded-xl bg-[#FDB813] text-[#001a4d] flex items-center justify-center font-black text-lg shadow-xs group-hover:scale-105 transition-transform flex-shrink-0">
                         <i class="fas fa-gift"></i>
                     </div>
-                    <div>
-                        <p class="text-[11px] font-bold text-white/70 uppercase tracking-wider">PLN Point</p>
-                        <p class="text-lg font-black text-[#FDB813] group-hover:text-yellow-300 transition-colors">
-                            {{ number_format($sisaPoin ?? 0, 0, ',', '.') }} <span class="text-xs font-medium text-white/80">Poin</span>
+                    <div class="min-w-[95px]">
+                        <p class="text-[11px] font-bold text-white/70 uppercase tracking-wider mb-0.5">PLN Point</p>
+                        <p class="text-xl font-black text-[#FDB813] group-hover:text-yellow-300 transition-colors flex items-baseline gap-1">
+                            <span>{{ number_format($sisaPoin ?? 0, 0, ',', '.') }}</span>
+                            <span class="text-xs font-semibold text-white/80">Poin</span>
                         </p>
                     </div>
                 </a>
 
                 {{-- Status Daya Jaringan --}}
-                <div class="bg-white/10 backdrop-blur-md px-4.5 py-3 rounded-2xl border border-white/15 shadow-md flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center shadow-xs">
-                        <svg class="w-5 h-5 text-cyan-300" viewBox="0 0 24 24" fill="currentColor">
+                <div class="bg-white/10 backdrop-blur-md px-5 py-3.5 rounded-2xl border border-white/15 shadow-md flex items-center gap-3.5 relative overflow-hidden flex-shrink-0">
+                    <div class="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-cyan-400/15 pointer-events-none"></div>
+                    <div class="w-11 h-11 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center shadow-xs flex-shrink-0">
+                        <svg class="w-6 h-6 text-cyan-300" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                         </svg>
                     </div>
-                    <div>
-                        <p class="text-[11px] font-bold text-white/70 uppercase tracking-wider">Tegangan Listrik</p>
-                        <p class="text-lg font-black text-white">
-                            220V <span class="text-xs font-bold text-emerald-400">Normal (50Hz)</span>
-                        </p>
+                    <div class="min-w-[145px]">
+                        <p class="text-[11px] font-bold text-white/70 uppercase tracking-wider mb-0.5">Tegangan Listrik</p>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-black text-white tracking-tight">220V</span>
+                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-400/20 text-emerald-300 border border-emerald-400/30 whitespace-nowrap shadow-xs">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Normal (50Hz)
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
