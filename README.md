@@ -200,6 +200,7 @@ Seluruh dokumentasi teknis dan panduan operasional proyek telah diorganisir seca
 * **[03. 50 Data Dummy User (docs/03-DUMMY-USERS.md)](docs/03-DUMMY-USERS.md)** — Daftar 50 akun dummy, 8 skenario pengujian, dan file SQL.
 * **[04. Color Palette & UI Tokens (docs/04-COLOR-PALETTE.md)](docs/04-COLOR-PALETTE.md)** — Panduan warna korporat PLN, gradien, tipografi, dan UI Kit.
 * **[05. Feature Changelog (docs/05-FEATURE-CHANGELOG.md)](docs/05-FEATURE-CHANGELOG.md)** — Catatan perbaikan bug dan penambahan fitur terbaru.
+* **[06. Panduan Data Admin (docs/06-ADMIN-DATA-GUIDE.md)](docs/06-ADMIN-DATA-GUIDE.md)** — Pemetaan 11 tabel database, alur CRUD user, dan kueri Eloquent untuk panel admin.
 
 ---
 
