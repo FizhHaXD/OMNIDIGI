@@ -6,6 +6,7 @@ use App\Models\Bill;
 use App\Models\Customer;
 use App\Models\MeterReading;
 use App\Models\News;
+use App\Models\RewardClaim;
 use App\Models\Tariff;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -24,6 +25,7 @@ class DashboardController extends Controller
         // Summary data
         $totalTagihan = 0;
         $tagihanBelumBayar = 0;
+        $activeBill = null;
         $lastToken = null;
 
         if ($customer) {
@@ -34,6 +36,11 @@ class DashboardController extends Controller
             $tagihanBelumBayar = Bill::where('customer_id', $customer->id)
                 ->whereIn('status', ['unpaid', 'overdue'])
                 ->count();
+
+            $activeBill = Bill::where('customer_id', $customer->id)
+                ->whereIn('status', ['unpaid', 'overdue'])
+                ->orderBy('tanggal_jatuh_tempo', 'asc')
+                ->first();
         }
 
         // Token listrik terakhir milik user yang sukses
@@ -44,15 +51,29 @@ class DashboardController extends Controller
             ->latest()
             ->first();
 
+        // Hitung total poin reward user
+        $transactions = Transaction::where('user_id', $user->id)
+            ->where('status', 'success')
+            ->get();
+
+        $poinDidapat = 0;
+        foreach ($transactions as $trx) {
+            $poinDidapat += 10;
+            $poinDidapat += (int) floor($trx->amount / 100000) * 5;
+        }
+
+        $poinTerpakai = RewardClaim::where('user_id', $user->id)->sum('poin');
+        $sisaPoin = max(0, $poinDidapat - $poinTerpakai);
+
         // Transaksi terakhir
         $recentTransactions = Transaction::where('user_id', $user->id)
             ->latest()
-            ->take(5)
+            ->take(6)
             ->get();
 
         return view('dashboard.index', compact(
             'user', 'customer', 'customers', 'totalTagihan',
-            'tagihanBelumBayar', 'lastToken', 'recentTransactions'
+            'tagihanBelumBayar', 'activeBill', 'lastToken', 'recentTransactions', 'sisaPoin'
         ));
     }
 
