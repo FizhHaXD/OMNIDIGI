@@ -78,11 +78,11 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
             
             {{-- Left Col (7 / 12): Data Pelanggan & Token Terakhir --}}
-            <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+            <div class="lg:col-span-7 flex flex-col gap-5">
                 
                 @if($customer)
                 {{-- Master Customer ID Card with Aesthetic Circular Accents --}}
-                <div class="bg-gradient-to-br from-[#003d75] via-[#00529C] to-[#00265a] rounded-3xl p-6 sm:p-7 text-white shadow-xl relative overflow-hidden flex flex-col justify-between h-full border border-white/15">
+                <div class="bg-gradient-to-br from-[#003d75] via-[#00529C] to-[#00265a] rounded-3xl p-6 sm:p-7 text-white shadow-xl relative overflow-hidden border border-white/15">
                     {{-- Aesthetic Circles --}}
                     <div class="absolute -top-12 -right-12 w-56 h-56 bg-white/10 rounded-full pointer-events-none"></div>
                     <div class="absolute -bottom-10 right-20 w-44 h-44 bg-[#FDB813]/20 rounded-full blur-2xl pointer-events-none"></div>
@@ -129,14 +129,14 @@
 
                         <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/10">
                             <p class="text-white/60 text-[11px] font-semibold uppercase tracking-wider mb-0.5">Nama Pemilik</p>
-                            <p class="text-sm font-extrabold text-white truncate" title="{{ $customer->nama }}">
+                            <p class="text-sm font-extrabold text-white break-words" title="{{ $customer->nama }}">
                                 <i class="fas fa-user-check text-cyan-300 mr-1"></i>{{ $customer->nama }}
                             </p>
                         </div>
 
                         <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/10">
                             <p class="text-white/60 text-[11px] font-semibold uppercase tracking-wider mb-0.5">Lokasi Alamat</p>
-                            <p class="text-xs font-semibold text-white/90 truncate" title="{{ $customer->alamat }}">
+                            <p class="text-xs font-semibold text-white/90 break-words leading-relaxed" title="{{ $customer->alamat }}">
                                 <i class="fas fa-map-marker-alt text-amber-300 mr-1"></i>{{ $customer->alamat }}
                             </p>
                         </div>
@@ -158,42 +158,53 @@
 
                 {{-- Card Token Terakhir (Jika Prabayar) with Aesthetic Circle --}}
                 @if($lastToken && $lastToken->token_listrik)
-                <div class="card p-5 border-l-4 border-l-[#FDB813] bg-gradient-to-r from-amber-50/70 via-white to-amber-50/30 shadow-md rounded-3xl border border-slate-200/80 relative overflow-hidden">
+                <div class="card p-5 sm:p-6 border-l-4 border-l-[#FDB813] bg-gradient-to-r from-amber-50/80 via-white to-amber-50/40 shadow-md rounded-3xl border border-slate-200/90 relative overflow-hidden">
                     {{-- Aesthetic Circle Accent --}}
-                    <div class="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-amber-100/50 pointer-events-none"></div>
+                    <div class="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-amber-100/60 pointer-events-none"></div>
 
-                    <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                        <div class="flex items-center gap-3.5">
-                            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 flex items-center justify-center text-amber-700 flex-shrink-0 border border-amber-200/60 shadow-xs">
-                                <svg class="w-6 h-6 text-[#FDB813]" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="flex flex-wrap items-center gap-2 mb-0.5">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-[#FDB813]/30 text-[#9E6E00] uppercase tracking-wider">
-                                        <i class="fas fa-receipt mr-1"></i> 20 Digit Stroom Terakhir
-                                    </span>
-                                    <span class="text-xs text-slate-400 font-medium">{{ $lastToken->created_at->translatedFormat('d M Y, H:i') }} WIB</span>
+                    <div class="relative z-10 space-y-3.5">
+                        {{-- Top Metadata Row --}}
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-amber-500/15 flex items-center justify-center text-amber-700 flex-shrink-0 border border-amber-200 shadow-xs">
+                                    <svg class="w-5 h-5 text-[#FDB813]" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                    </svg>
                                 </div>
-                                <p class="text-xs text-slate-600 font-medium">
-                                    No. Meter: <strong class="font-mono text-slate-800">{{ $lastToken->no_meter }}</strong> · 
-                                    Nominal: <strong class="text-emerald-700 font-bold">Rp {{ number_format($lastToken->amount, 0, ',', '.') }}</strong>
-                                </p>
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#FDB813]/25 text-[#9E6E00] uppercase tracking-wider">
+                                        <i class="fas fa-receipt mr-1.5 text-xs"></i> 20 Digit Stroom Terakhir
+                                    </span>
+                                    <span class="text-xs text-slate-400 font-medium">
+                                        {{ $lastToken->created_at->translatedFormat('d M Y, H:i') }} WIB
+                                    </span>
+                                </div>
+                            </div>
+
+                            {{-- No. Meter & Nominal Badges --}}
+                            <div class="flex flex-wrap items-center gap-2 text-xs">
+                                <span class="px-2.5 py-1 rounded-xl bg-slate-100 text-slate-700 font-medium border border-slate-200/60">
+                                    No. Meter: <strong class="font-mono text-slate-900 font-bold">{{ $lastToken->no_meter }}</strong>
+                                </span>
+                                <span class="px-2.5 py-1 rounded-xl bg-emerald-50 text-emerald-800 font-extrabold border border-emerald-200">
+                                    Rp {{ number_format($lastToken->amount, 0, ',', '.') }}
+                                </span>
                             </div>
                         </div>
 
-                        {{-- 20 Digit Token Code & Copy Button --}}
-                        <div class="flex items-center justify-between sm:justify-end gap-3 bg-white p-3 rounded-2xl border border-slate-200 shadow-xs">
-                            <div>
-                                <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Nomor Kode Stroom</p>
-                                <p class="text-lg sm:text-xl font-black font-mono tracking-widest text-[#00529C] select-all">{{ $lastToken->token_listrik }}</p>
+                        {{-- Prominent 20-Digit Code Box & Copy Button --}}
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 sm:p-4 rounded-2xl border border-amber-200/80 shadow-xs">
+                            <div class="min-w-0">
+                                <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider mb-0.5">Nomor Kode Stroom</p>
+                                <p class="text-lg sm:text-2xl font-black font-mono tracking-widest text-[#00529C] select-all whitespace-nowrap overflow-x-auto py-0.5">
+                                    {{ $lastToken->token_listrik }}
+                                </p>
                             </div>
                             <button type="button" onclick="copyText('{{ $lastToken->token_listrik }}', this)"
-                                    class="px-3.5 py-2 bg-[#00529C] hover:bg-[#003d75] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow transition-all whitespace-nowrap active:scale-95" 
+                                    class="px-4 py-2.5 bg-[#00529C] hover:bg-[#003d75] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow transition-all whitespace-nowrap active:scale-95 flex-shrink-0" 
                                     title="Salin Kode Token">
                                 <i class="far fa-copy text-xs"></i>
-                                <span>Salin</span>
+                                <span>Salin Kode</span>
                             </button>
                         </div>
                     </div>
@@ -203,7 +214,7 @@
             </div>
 
             {{-- Right Col (5 / 12): Ringkasan Tagihan & Finansial with Aesthetic Circle --}}
-            <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
+            <div class="lg:col-span-5 flex flex-col">
                 
                 {{-- Billing Summary Card --}}
                 <div class="card p-6 sm:p-7 bg-white border border-slate-200/90 shadow-lg rounded-3xl flex flex-col justify-between h-full relative overflow-hidden">
@@ -244,7 +255,7 @@
                                     <span class="font-bold {{ \Carbon\Carbon::parse($activeBill->tanggal_jatuh_tempo)->isPast() ? 'text-red-600' : 'text-slate-700' }}">
                                         {{ \Carbon\Carbon::parse($activeBill->tanggal_jatuh_tempo)->translatedFormat('d F Y') }}
                                         @if(\Carbon\Carbon::parse($activeBill->tanggal_jatuh_tempo)->isPast())
-                                            (Lewat Tempo)
+                                             (Lewat Tempo)
                                         @endif
                                     </span>
                                 </div>
@@ -256,8 +267,8 @@
                         </div>
                     </div>
 
-                    {{-- Billing Action Buttons --}}
-                    <div class="space-y-2.5 pt-1 relative z-10">
+                    {{-- Billing Action Buttons & Trust Micro Note --}}
+                    <div class="space-y-3 pt-1 relative z-10">
                         @if($totalTagihan > 0)
                             <a href="{{ route('dashboard.tagihan') }}" class="w-full py-3.5 px-5 rounded-2xl bg-[#00529C] hover:bg-[#003d75] text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-900/25 transition-all hover:scale-[1.01] active:scale-[0.99]">
                                 <i class="fas fa-credit-card text-[#FDB813]"></i>
@@ -277,6 +288,16 @@
                             <a href="{{ route('dashboard.metering') }}" class="py-2.5 px-3 rounded-2xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center justify-center gap-1.5 transition text-center shadow-xs">
                                 <i class="fas fa-camera text-emerald-600"></i> Catat Meter
                             </a>
+                        </div>
+
+                        {{-- Trust Micro Note --}}
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-medium">
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-shield-alt text-[#00529C]"></i> Transaksi Resmi PLN
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-bolt text-[#FDB813]"></i> Verifikasi Instan
+                            </span>
                         </div>
                     </div>
 
