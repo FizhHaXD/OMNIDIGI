@@ -16,6 +16,7 @@ Urutan membaca dan implementasi yang direkomendasikan:
 | **Step 4** | [🎨 `04-COLOR-PALETTE.md`](04-COLOR-PALETTE.md) | **Design System & Skema Warna PLN DIGI**<br>Palette warna korporat PLN (Biru `#00529C`, Kuning `#FDB813`), gradients, typography Plus Jakarta Sans, dan styling tokens. |
 | **Step 5** | [🚀 `05-FEATURE-CHANGELOG.md`](05-FEATURE-CHANGELOG.md) | **Log Fitur & Perbaikan Sistem Terkini**<br>Dokumentasi penyelesaian bug Self Metering (SwaCAM), PLN Point Reward, Monitoring kWh & Biaya, Simulasi Keuangan, Alur Pembayaran Cepat, Widget Token Stroom, Halaman Profil Baru, dan Redesign Registrasi Akun. |
 | **Step 6** | [🛡️ `06-ADMIN-DATA-GUIDE.md`](06-ADMIN-DATA-GUIDE.md) | **Panduan Data untuk Admin Dashboard**<br>Dokumentasi lengkap 11 tabel database, kolom, relasi, data yang masuk dari setiap CRUD user, contoh Eloquent query, dan status fitur admin yang sudah ada vs belum. Referensi utama untuk tim yang membangun dashboard admin. |
+| **Step 7** | [⚡ `07-ADMIN-AI-DOCUMENT-SYSTEM.md`](07-ADMIN-AI-DOCUMENT-SYSTEM.md) | **Sistem Dashboard Admin & Integrasi AI Agent Surat Kedinasan**<br>Dokumentasi lengkap arsitektur klasifikasi operasional (Aging Overdue SP-1/SP-2/SPK, Severity Outages YANTEK, Anomali SwaCAM), jembatan AI Agent (Prompt & JSON Schema), preview cetak A4 resmi, dan bedah kode sumber controller & views. |
 
 ---
 
