@@ -22,6 +22,19 @@ Dokumentasi arsitektur, klasifikasi operasional, referensi kode, dan panduan int
    - [4.4 `routes/web.php`](#44-routeswebphp)
 5. [Panduan Integrasi AI Agent Pembentuk Surat](#5-panduan-integrasi-ai-agent-pembentuk-surat)
 6. [Roadmap Pengembangan API & Webhook](#6-roadmap-pengembangan-api--webhook)
+7. [Standar & Asal-Usul Format Dokumen Kedinasan PLN](#7-standar--asal-usul-format-dokumen-kedinasan-pln)
+   - [7.1 Dasar Hukum & Regulasi](#71-dasar-hukum--regulasi)
+   - [7.2 Rumus & Format Nomor Surat Dinas Resmi PLN](#72-rumus--format-nomor-surat-dinas-resmi-pln)
+   - [7.3 Anatomi 5 Bagian Lembar Naskah Dinas PLN](#73-anatomi-5-bagian-lembar-naskah-dinas-pln)
+8. [Panduan Konversi ke Teks & WhatsApp Broadcast](#8-panduan-konversi-ke-teks--whatsapp-broadcast)
+   - [8.1 Menjalankan Command CLI Artisan](#81-menjalankan-command-cli-artisan)
+   - [8.2 Endpoint Web untuk Unduh File Teks](#82-endpoint-web-untuk-unduh-file-teks)
+9. [Panduan Konversi ke Dokumen PDF (4 Metode Lengkap)](#9-panduan-konversi-ke-dokumen-pdf-4-metode-lengkap)
+   - [Metode 1: Built-in Headless Browser CLI (0 Package)](#metode-1-built-in-headless-browser-cli-direkomendasikan--0-package-tambahan)
+   - [Metode 2: Library Laravel DomPDF](#metode-2-library-laravel-dompdf-barryvdhlaravel-dompdf)
+   - [Metode 3: Library Spatie Browsershot (Puppeteer)](#metode-3-library-spatie-browsershot-puppeteer--nodejs)
+   - [Metode 4: Native Browser Print Engine](#metode-4-native-browser-print-engine-windowprint---media-print)
+10. [Referensi Kode Sumber yang Terkait](#10-referensi-kode-sumber-yang-terkait)
 
 ---
 
@@ -410,6 +423,225 @@ Untuk integrasi dua arah otomatis di masa mendatang:
 1. **Endpoint REST API**: Menambahkan route `POST /api/v1/letters/generate` yang menerima JSON payload dan langsung memanggil model AI di server.
 2. **Auto Delivery**: Mengintegrasikan draf surat yang dihasilkan AI ke modul WhatsApp Gateway (Fonnte/Twilio) atau email SMTP resmi pelanggan.
 3. **Penyimpanan Berkas Digital**: Menyimpan dokumen PDF hasil generasi ke bucket cloud storage (S3) dengan penomoran unik arsip dinas PLN.
+
+---
+
+## 7. Standar & Asal-Usul Format Dokumen Kedinasan PLN
+
+Format surat yang digunakan dalam sistem PLN DIGI **bukan template fiktif sembarangan**, melainkan mengacu langsung pada standar hukum dan tata naskah dinas resmi PT PLN (Persero):
+
+### 7.1 Dasar Hukum & Regulasi
+1. **Peraturan Direksi PT PLN (Persero) No. 0022.P/DIR/2020** tentang *Pedoman Tata Naskah Dinas PT PLN (Persero)* (TNDE — Tata Naskah Dinas Elektronik).
+2. **Peraturan Menteri Energi dan Sumber Daya Mineral (ESDM) No. 27 Tahun 2017** tentang *Tingkat Mutu Pelayanan dan Biaya yang Terkait dengan Penyaluran Tenaga Listrik oleh PT PLN (Persero)*. Mengatur bahwa keterlambatan pembayaran melewati batas jatuh tempo (tanggal 20) memberikan hak hukum bagi PLN untuk mengenakan denda dan melakukan pemutusan sementara.
+3. **Perjanjian Jual Beli Tenaga Listrik (PJBTL) Pasal 7**: Klausul kontrak sah antara pelanggan dan PLN mengenai hak, kewajiban, dan sanksi penertiban.
+4. **Keputusan Direksi PT PLN (Persero) No. 088-Z.P/DIR/2016**: Petunjuk Teknis *Penertiban Pemakaian Tenaga Listrik (P2TL)* untuk pemeriksaan stand meter dan investigasi kebocoran arus.
+5. **UU No. 1 Tahun 2024 tentang ITE**: Menetapkan keabsahan hukum Tanda Tangan Elektronik (TTE) dan QR Code verifikasi dokumen digital.
+
+### 7.2 Rumus & Format Nomor Surat Dinas Resmi PLN
+Format nomor surat kedinasan PLN tersusun atas 5 blok kode terstandar:
+
+```
+    041  /  DIS.01.02  /  ULP-JKT  /  SP-1  /  2026
+    ──┬─    ────┬────     ───┬───     ──┬─     ─┬──
+      │         │            │          │       └── Tahun Takwim Berjalan
+      │         │            │          └────────── Singkatan Jenis Naskah Dinas
+      │         │            └───────────────────── Kode Unit Layanan Pelanggan (Ciracas/Jakarta)
+      │         └────────────────────────────────── Kode Klasifikasi Masalah Arsip (Distribusi & Piutang)
+      └──────────────────────────────────────────── Nomor Urut Surat Keluar di Buku Register ULP
+```
+
+- **`041`**: Nomor urut berkas keluar pada buku agenda sekretariat dinas ULP.
+- **`DIS.01.02`**: Kode Klasifikasi Masalah Kearsipan PLN:
+  - `DIS`: Bidang Distribusi & Niaga Tenaga Listrik.
+  - `01`: Penjualan Tenaga Listrik & Pelayanan Pelanggan.
+  - `02`: Pengendalian Piutang & Penagihan Rekening Listrik.
+- **`ULP-JKT`**: Unit Layanan Pelanggan pelaksana (contoh: ULP Ciracas / ULP Kramat Jati).
+- **`SP-1` / `SP-2` / `SPK` / `BA-P2TL`**: Jenis surat (Surat Peringatan 1 / 2, Surat Perintah Kerja, Berita Acara).
+- **`2026`**: Tahun takwim penerbitan surat.
+
+### 7.3 Anatomi 5 Bagian Lembar Naskah Dinas PLN
+1. **Kepala Surat (Kop Surat Resmi)**:
+   - Lambang Petir Kuning & Gelombang Biru PT PLN (Persero).
+   - Teks Identitas: `PT PLN (PERSERO) - DISTRIBUSI JAKARTA RAYA - ULP CIRACAS`.
+   - Sertifikasi Mutu: `ISO 9001:2015`.
+   - Saluran Pengaduan: `Call Center 123` dan `www.pln.co.id`.
+2. **Metadata Surat**:
+   - `Nomor`, `Lampiran` (1 Berkas), `Sifat` (*PENTING / SEGERA*), `Perihal`, dan Tanggal Terbit.
+3. **Identitas Subjek Pelanggan**:
+   - Nama Pelanggan, ID Pelanggan (12 Digit), Golongan Tarif & Daya VA, serta Alamat Objek.
+4. **Batang Tubuh (Isi Surat)**:
+   - Paragraf konsideran mengutip PJBTL & Permen ESDM.
+   - Tabel rincian pokok tagihan, pemakaian kWh, denda keterlambatan, dan total kewajiban.
+   - Instruksi batas waktu pelunasan (*SLA 3 hari kerja* untuk SP-1; *1x24 jam* untuk SP-2).
+   - Konsekuensi pemutusan fisik MCB oleh Tim P2TL jika melampaui batas waktu.
+5. **Kaki Surat (Pengesahan Legalitas)**:
+   - QR Code verifikasi dokumen elektronik (UUID unik sistem PLN DIGI).
+   - Tanda tangan digital dan stempel dinas PLN (merah miring $12^\circ$).
+   - Nama Pejabat Berwenang: `IR. H. BAMBANG PRASETYO, M.T.` (Manajer ULP) beserta NIP resmi.
+
+---
+
+## 8. Panduan Konversi ke Teks & WhatsApp Broadcast
+
+Untuk keperluan pengiriman notifikasi otomatis via SMS, WhatsApp Gateway, atau prompt input bagi model LLM:
+
+### 8.1 Menjalankan Command CLI Artisan
+Aplikasi telah dilengkapi Artisan Command khusus:
+
+```bash
+# 1. Konversi ke Plain Text (Memo Dinas)
+php artisan letter:generate sp1 --format=text
+
+# 2. Konversi ke Format WhatsApp Broadcast (Lengkap dengan Bold & Emoji)
+php artisan letter:generate sp1 --format=wa
+
+# 3. Konversi dan Simpan ke File Eksternal
+php artisan letter:generate sp1 --format=text --output="storage/app/memo_sp1.txt"
+
+# 4. Generate Format JSON untuk Konsumsi AI Agent
+php artisan letter:generate sp1 --format=json
+```
+
+### 8.2 Endpoint Web untuk Unduh File Teks
+Admin dapat mengunduh langsung berkas `.txt` melalui browser:
+- **Plain Text**: `http://localhost:8000/admin/letters/download-text?type=sp1&bill_id=3&format=text`
+- **WhatsApp Text**: `http://localhost:8000/admin/letters/download-text?type=sp1&bill_id=3&format=wa`
+
+### 8.3 Contoh Output Teks WhatsApp
+```text
+*[PEMBERITAHUAN RESMI PT PLN (PERSERO)]*
+No: _041/DIS.01.02/ULP-JKT/SP-1/2026_
+
+Kepada Yth. *Budi Santoso*
+ID Pelanggan: `531200026789`
+
+Kami menginformasikan bahwa tagihan listrik Anda periode berjalan tercatat belum lunas dengan rincian:
+💰 *Total Wajib Bayar: Rp 518.237*
+⏳ *Batas Waktu: 3 Hari Kerja*
+
+Mohon segera lakukan pembayaran melalui aplikasi *PLN DIGI* atau gerai pembayaran terdekat guna menghindari sanksi pemutusan sementara.
+_Informasi resmi Call Center PLN: 123_
+```
+
+---
+
+## 9. Panduan Konversi ke Dokumen PDF (4 Metode Lengkap)
+
+Terdapat 4 pilihan metode konversi ke PDF yang dapat digunakan sesuai infrastruktur server Anda:
+
+### Metode 1: Built-in Headless Browser CLI (Direkomendasikan — 0 Package Tambahan)
+Metode ini memanfaatkan Microsoft Edge atau Google Chrome yang sudah terpasang di sistem operasi server tanpa perlu menginstal package composer tambahan.
+
+#### Perintah Windows PowerShell / CMD:
+```powershell
+# Menggunakan Microsoft Edge (bawaan Windows)
+msedge --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="C:\dokumen_sp1.pdf" "http://localhost:8000/admin/letters/preview?type=sp1&bill_id=3"
+
+# Menggunakan Google Chrome
+chrome --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="C:\dokumen_sp1.pdf" "http://localhost:8000/admin/letters/preview?type=sp1&bill_id=3"
+```
+
+#### Perintah Linux Server (Ubuntu/Debian):
+```bash
+google-chrome-stable --headless --disable-gpu --no-pdf-header-footer --print-to-pdf=/var/www/sp1.pdf http://localhost:8000/admin/letters/preview?type=sp1&bill_id=3
+```
+
+#### Menjalankan via Artisan Command:
+```bash
+php artisan letter:generate sp1 --format=pdf
+# File otomatis tersimpan di storage/app/public/sp1_{timestamp}.pdf
+```
+
+---
+
+### Metode 2: Library Laravel DomPDF (`barryvdh/laravel-dompdf`)
+Jika Anda ingin menghasilkan PDF secara murni di level PHP (tanpa menjalankan browser headless):
+
+#### 1. Instalasi:
+```bash
+composer require barryvdh/laravel-dompdf
+```
+
+#### 2. Implementasi di Controller:
+```php
+use Barryvdh\DomPDF\Facade\Pdf;
+
+public function exportPdf(Request $request)
+{
+    $bill = Bill::with(['customer.tariff'])->findOrFail($request->bill_id);
+    $nomorSurat = '041/DIS.01.02/ULP-JKT/SP-1/' . date('Y');
+
+    $pdf = Pdf::loadView('admin.letter-preview', compact('bill', 'nomorSurat'))
+              ->setPaper('a4', 'portrait');
+
+    return $pdf->download('Surat_Peringatan_PLN_' . $bill->customer->id_pelanggan . '.pdf');
+}
+```
+
+---
+
+### Metode 3: Library Spatie Browsershot (Puppeteer / Node.js)
+Jika server memiliki Node.js dan menginginkan hasil render vector PDF presisi tinggi:
+
+#### 1. Instalasi:
+```bash
+composer require spatie/browsershot
+npm install puppeteer
+```
+
+#### 2. Implementasi di Controller:
+```php
+use Spatie\Browsershot\Browsershot;
+
+public function exportBrowsershot(Request $request)
+{
+    $url = route('admin.letters.preview', ['type' => 'sp1', 'bill_id' => $request->bill_id]);
+
+    $pdfPath = storage_path('app/public/surat_' . time() . '.pdf');
+
+    Browsershot::url($url)
+        ->format('A4')
+        ->margins(15, 20, 15, 20)
+        ->showBackground()
+        ->save($pdfPath);
+
+    return response()->download($pdfPath);
+}
+```
+
+---
+
+### Metode 4: Native Browser Print Engine (`window.print()` / `@media print`)
+Metode paling instan untuk petugas admin di browser:
+1. Buka halaman pratinjau: `http://localhost:8000/admin/letters/preview?type=sp1`
+2. Klik tombol **"Cetak / Simpan PDF"** di pojok kanan atas atau tekan `Ctrl + P`.
+3. Pada dialog cetak browser, pilih tujuan: **"Save as PDF"** / **"Simpan sebagai PDF"**.
+4. Lembar surat dicetak secara bersih tanpa navbar web, tombol, atau background abu-abu karena telah diisolasi oleh stylesheet:
+   ```css
+   @media print {
+       body { background: white !important; margin: 0 !important; }
+       .no-print { display: none !important; }
+       .paper-a4 {
+           width: 100% !important;
+           margin: 0 !important;
+           box-shadow: none !important;
+           page-break-after: avoid;
+       }
+   }
+   ```
+
+---
+
+## 10. Referensi Kode Sumber yang Terkait
+
+| Komponen File | Fungsi & Peran |
+|---|---|
+| [LetterFormatterService.php](file:///c:/Users/ASUS/PROJECT%20CODING/Lomba%20PLNDIGI/app/Services/LetterFormatterService.php) | Service pusat penomoran dinas, konversi ke Plain Text, format WhatsApp, dan eksekutor CLI print-to-pdf headless. |
+| [GenerateLetterCommand.php](file:///c:/Users/ASUS/PROJECT%20CODING/Lomba%20PLNDIGI/app/Console/Commands/GenerateLetterCommand.php) | Artisan CLI command: `php artisan letter:generate {type} {id?} --format={text\|wa\|json\|pdf}`. |
+| [AdminController.php](file:///c:/Users/ASUS/PROJECT%20CODING/Lomba%20PLNDIGI/app/Http/Controllers/Admin/AdminController.php) | Method `letters()`, `previewLetter()`, dan `downloadText()` untuk streaming berkas dokumen kedinasan. |
+| [letters.blade.php](file:///c:/Users/ASUS/PROJECT%20CODING/Lomba%20PLNDIGI/resources/views/admin/letters.blade.php) | UI Generator interaktif dengan form parameter dinamis, Alpine.js live state, tombol salin Prompt AI & JSON payload. |
+| [letter-preview.blade.php](file:///c:/Users/ASUS/PROJECT%20CODING/Lomba%20PLNDIGI/resources/views/admin/letter-preview.blade.php) | Template lembar kerja resmi standar A4 PLN dengan kop dinas, barcode QR UUID, stempel basah $12^\circ$, dan CSS print. |
+| [routes/web.php](file:///c:/Users/ASUS/PROJECT%20CODING/Lomba%20PLNDIGI/routes/web.php) | Endpoint rute admin terproteksi: `/admin/letters`, `/admin/letters/preview`, `/admin/letters/download-text`. |
 
 ---
 

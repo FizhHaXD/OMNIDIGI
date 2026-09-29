@@ -89,6 +89,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Pusat Dokumen & Surat Kedinasan (AI-Ready)
     Route::get('/letters', [AdminController::class, 'letters'])->name('letters');
     Route::get('/letters/preview', [AdminController::class, 'previewLetter'])->name('letters.preview');
+    Route::get('/letters/download-text', [AdminController::class, 'downloadText'])->name('letters.download_text');
 });
 
 require __DIR__.'/auth.php';

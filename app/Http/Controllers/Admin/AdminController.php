@@ -342,4 +342,26 @@ class AdminController extends Controller
 
         return view('admin.letter-preview', compact('type', 'bill', 'outage', 'nomorSurat'));
     }
+
+    /**
+     * Unduh Surat Resmi dalam Format Teks (.txt)
+     */
+    public function downloadText(Request $request)
+    {
+        $type = $request->get('type', 'sp1');
+        $format = $request->get('format', 'text');
+        $bill = $request->filled('bill_id') ? Bill::with(['customer.tariff'])->find($request->bill_id) : null;
+        $outage = $request->filled('outage_id') ? OutageReport::with(['user', 'customer'])->find($request->outage_id) : null;
+
+        $content = $format === 'wa'
+            ? \App\Services\LetterFormatterService::toWhatsApp($type, $bill, $outage)
+            : \App\Services\LetterFormatterService::toPlainText($type, $bill, $outage);
+
+        $filename = "SURAT_PLN_" . strtoupper($type) . "_" . now()->format('Ymd_His') . ".txt";
+
+        return response($content, 200, [
+            'Content-Type' => 'text/plain; charset=utf-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ]);
+    }
 }
