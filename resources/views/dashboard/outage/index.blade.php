@@ -12,7 +12,7 @@
     </div>
 </section>
 
-<section class="py-8 md:py-10">
+<section class="py-8 md:py-12">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Flash --}}
@@ -44,11 +44,11 @@
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex-1">
                             <div class="flex items-center gap-2 mb-2">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium
                                     {{ $report->status === 'selesai' ? 'bg-emerald-50 text-emerald-700' : ($report->status === 'diproses' ? 'bg-blue-50 text-blue-700' : 'bg-amber-50 text-amber-700') }}">
-                                    @if($report->status === 'selesai') <i class="fas fa-check-circle mr-1"></i>Selesai
-                                    @elseif($report->status === 'diproses') <i class="fas fa-spinner mr-1"></i>Diproses
-                                    @else <i class="fas fa-clock mr-1"></i>Dilaporkan
+                                    @if($report->status === 'selesai') <i class="fas fa-check-circle text-[10px]"></i> Selesai
+                                    @elseif($report->status === 'diproses') <i class="fas fa-spinner fa-spin text-[10px]"></i> Diproses
+                                    @else <i class="fas fa-clock text-[10px]"></i> Dilaporkan
                                     @endif
                                 </span>
                                 <span class="text-xs text-slate-400">{{ $report->created_at->format('d M Y H:i') }}</span>

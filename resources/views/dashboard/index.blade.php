@@ -3,7 +3,7 @@
 
 @section('content')
 {{-- Header --}}
-<section class="relative -mt-16 md:-mt-18 bg-gradient-to-br from-[#001230] via-[#00265a] to-[#001a4d] text-white overflow-hidden">
+<section class="relative -mt-16 md:-mt-18 bg-gradient-to-br from-[#001230] via-[#00265a] to-[#001a4d] text-white overflow-hidden" style="min-height:180px">
     <div class="absolute inset-0 opacity-10">
         <div class="absolute top-10 right-10 w-72 h-72 bg-[#FDB813] rounded-full blur-[120px]"></div>
     </div>
@@ -20,7 +20,7 @@
     </div>
 </section>
 
-<section class="py-8 md:py-10">
+<section class="py-8 md:py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Info Card Pelanggan --}}
@@ -97,11 +97,11 @@
         @endif
 
         {{-- Grid Menu Fitur (4x2) --}}
-        <h2 class="text-lg font-bold text-slate-900 mb-5">Layanan</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-4 mb-10">
+        <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2"><i class="fas fa-th-large text-[#00529C] text-base"></i> Layanan</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
             {{-- Bayar Tagihan --}}
-            <a href="{{ route('dashboard.tagihan') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
-                <div class="w-12 h-12 bg-[#00529C]/10 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-[#00529C]/20 transition-colors">
+            <a href="{{ route('dashboard.tagihan') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 bg-[#00529C]/10 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-[#00529C]/20 transition-colors duration-300">
                     <i class="fas fa-file-invoice-dollar text-[#00529C] text-lg"></i>
                 </div>
                 <p class="text-sm font-semibold text-slate-700">Tagihan</p>
@@ -109,8 +109,8 @@
             </a>
 
             {{-- Beli Token --}}
-            <a href="{{ route('dashboard.token') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
-                <div class="w-12 h-12 bg-[#FDB813]/15 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-[#FDB813]/25 transition-colors">
+            <a href="{{ route('dashboard.token') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 bg-[#FDB813]/15 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-[#FDB813]/25 transition-colors duration-300">
                     <i class="fas fa-bolt text-[#FDB813] text-lg"></i>
                 </div>
                 <p class="text-sm font-semibold text-slate-700">Token</p>
@@ -118,8 +118,8 @@
             </a>
 
             {{-- Self Metering --}}
-            <a href="{{ route('dashboard.metering') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
-                <div class="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-emerald-100 transition-colors">
+            <a href="{{ route('dashboard.metering') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-emerald-100 transition-colors duration-300">
                     <i class="fas fa-tachometer-alt text-emerald-600 text-lg"></i>
                 </div>
                 <p class="text-sm font-semibold text-slate-700">Self Metering</p>
@@ -127,8 +127,8 @@
             </a>
 
             {{-- Monitoring --}}
-            <a href="{{ route('dashboard.monitoring') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
-                <div class="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-indigo-100 transition-colors">
+            <a href="{{ route('dashboard.monitoring') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-indigo-100 transition-colors duration-300">
                     <i class="fas fa-chart-line text-indigo-600 text-lg"></i>
                 </div>
                 <p class="text-sm font-semibold text-slate-700">Monitoring</p>
@@ -136,8 +136,8 @@
             </a>
 
             {{-- Simulasi Keuangan --}}
-            <a href="{{ route('dashboard.simulasi') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
-                <div class="w-12 h-12 bg-cyan-50 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-cyan-100 transition-colors">
+            <a href="{{ route('dashboard.simulasi') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 bg-cyan-50 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-cyan-100 transition-colors duration-300">
                     <i class="fas fa-calculator text-cyan-600 text-lg"></i>
                 </div>
                 <p class="text-sm font-semibold text-slate-700">Simulasi</p>
@@ -145,8 +145,8 @@
             </a>
 
             {{-- Report Outage --}}
-            <a href="{{ route('dashboard.outage') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
-                <div class="w-12 h-12 bg-red-50 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-red-100 transition-colors">
+            <a href="{{ route('dashboard.outage') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 bg-red-50 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-red-100 transition-colors duration-300">
                     <i class="fas fa-exclamation-triangle text-red-500 text-lg"></i>
                 </div>
                 <p class="text-sm font-semibold text-slate-700">Lapor Gangguan</p>
@@ -154,8 +154,8 @@
             </a>
 
             {{-- PLN Reward --}}
-            <a href="{{ route('dashboard.reward') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
-                <div class="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-amber-100 transition-colors">
+            <a href="{{ route('dashboard.reward') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-amber-100 transition-colors duration-300">
                     <i class="fas fa-gift text-amber-500 text-lg"></i>
                 </div>
                 <p class="text-sm font-semibold text-slate-700">PLN Reward</p>
@@ -163,8 +163,8 @@
             </a>
 
             {{-- Profil --}}
-            <a href="{{ route('profile.edit') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
-                <div class="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-slate-200 transition-colors">
+            <a href="{{ route('profile.edit') }}" class="card p-5 text-center group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-slate-200 transition-colors duration-300">
                     <i class="fas fa-user-cog text-slate-500 text-lg"></i>
                 </div>
                 <p class="text-sm font-semibold text-slate-700">Profil</p>
@@ -173,7 +173,7 @@
         </div>
 
         {{-- Transaksi Terakhir --}}
-        <h2 class="text-lg font-bold text-slate-900 mb-4">Transaksi Terakhir</h2>
+        <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2"><i class="fas fa-clock-rotate-left text-[#00529C] text-base"></i> Transaksi Terakhir</h2>
         @if($recentTransactions->isEmpty())
             <div class="card p-10 text-center mb-8">
                 <div class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -186,11 +186,11 @@
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead>
-                            <tr class="border-b border-slate-100 bg-slate-50/50">
-                                <th class="px-5 py-3 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Tanggal</th>
-                                <th class="px-5 py-3 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Jenis</th>
-                                <th class="px-5 py-3 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Jumlah</th>
-                                <th class="px-5 py-3 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Status</th>
+                            <tr class="border-b border-slate-100 bg-slate-50/60">
+                                <th class="px-5 py-3.5 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Tanggal</th>
+                                <th class="px-5 py-3.5 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Jenis</th>
+                                <th class="px-5 py-3.5 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Jumlah</th>
+                                <th class="px-5 py-3.5 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Status</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-50">
@@ -200,9 +200,9 @@
                                 <td class="px-5 py-3.5 text-sm font-medium capitalize text-slate-700">{{ $trx->type }}</td>
                                 <td class="px-5 py-3.5 text-sm font-semibold text-slate-900">Rp {{ number_format($trx->amount, 0, ',', '.') }}</td>
                                 <td class="px-5 py-3.5">
-                                    @if($trx->status === 'success') <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700">Berhasil</span>
-                                    @elseif($trx->status === 'pending') <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700">Pending</span>
-                                    @else <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-50 text-red-700">Gagal</span>
+                                    @if($trx->status === 'success') <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700"><i class="fas fa-check-circle text-[10px]"></i> Berhasil</span>
+                                    @elseif($trx->status === 'pending') <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700"><i class="fas fa-clock text-[10px]"></i> Pending</span>
+                                    @else <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-50 text-red-700"><i class="fas fa-times-circle text-[10px]"></i> Gagal</span>
                                     @endif
                                 </td>
                             </tr>

@@ -12,7 +12,7 @@
     </div>
 </section>
 
-<section class="py-8 md:py-10">
+<section class="py-8 md:py-12">
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="card p-6">
             <form method="POST" action="{{ route('dashboard.outage.store') }}" enctype="multipart/form-data">

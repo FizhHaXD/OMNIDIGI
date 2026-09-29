@@ -12,7 +12,7 @@
     </div>
 </section>
 
-<section class="py-8 md:py-10">
+<section class="py-8 md:py-12">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-end mb-5">
             <a href="{{ route('produk.token') }}" class="btn-primary text-sm">
@@ -33,12 +33,12 @@
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead>
-                            <tr class="border-b border-slate-100 bg-slate-50/50">
-                                <th class="px-5 py-3 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Tanggal</th>
-                                <th class="px-5 py-3 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Nominal</th>
-                                <th class="px-5 py-3 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Token Listrik</th>
-                                <th class="px-5 py-3 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Metode Bayar</th>
-                                <th class="px-5 py-3 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Status</th>
+                            <tr class="border-b border-slate-100 bg-slate-50/60">
+                                <th class="px-5 py-3.5 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Tanggal</th>
+                                <th class="px-5 py-3.5 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Nominal</th>
+                                <th class="px-5 py-3.5 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Token Listrik</th>
+                                <th class="px-5 py-3.5 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Metode Bayar</th>
+                                <th class="px-5 py-3.5 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Status</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-50">
@@ -49,9 +49,9 @@
                                 <td class="px-5 py-3.5 text-sm font-mono text-[#00529C]">{{ $t->token_listrik ?? '-' }}</td>
                                 <td class="px-5 py-3.5 text-sm text-slate-500">{{ $t->paymentMethod->nama ?? '-' }}</td>
                                 <td class="px-5 py-3.5">
-                                    @if($t->status === 'success') <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700">Berhasil</span>
-                                    @elseif($t->status === 'pending') <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700">Pending</span>
-                                    @else <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-50 text-red-700">Gagal</span>
+                                    @if($t->status === 'success') <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700"><i class="fas fa-check-circle text-[10px]"></i> Berhasil</span>
+                                    @elseif($t->status === 'pending') <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700"><i class="fas fa-clock text-[10px]"></i> Pending</span>
+                                    @else <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-50 text-red-700"><i class="fas fa-times-circle text-[10px]"></i> Gagal</span>
                                     @endif
                                 </td>
                             </tr>
