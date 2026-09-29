@@ -10,8 +10,12 @@
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-10 md:pt-36 md:pb-14">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/10 text-[#FDB813] text-2xl">
-                    <i class="fas fa-user-circle"></i>
+                <div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/10 text-[#FDB813] text-2xl overflow-hidden shadow-sm">
+                    @if($user->avatar_url)
+                        <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
+                    @else
+                        <i class="fas fa-user-circle"></i>
+                    @endif
                 </div>
                 <div>
                     <h1 class="text-2xl md:text-3xl font-bold">Pengaturan Akun & Profil</h1>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Services\AvatarSanitizerService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,15 +25,34 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request, AvatarSanitizerService $avatarSanitizer): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $validated = $request->validated();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $user->fill([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+        ]);
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        // Handle Avatar Upload with Strict Sanitization
+        if ($request->hasFile('avatar')) {
+            $safeAvatarPath = $avatarSanitizer->sanitizeAndStore(
+                $request->file('avatar'),
+                $user->avatar
+            );
+            $user->avatar = $safeAvatarPath;
+        } elseif ($request->boolean('remove_avatar')) {
+            // User requested to remove existing avatar
+            $avatarSanitizer->deleteAvatar($user->avatar);
+            $user->avatar = null;
+        }
+
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
@@ -40,13 +60,16 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request, AvatarSanitizerService $avatarSanitizer): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);
 
         $user = $request->user();
+
+        // Delete avatar file if exists
+        $avatarSanitizer->deleteAvatar($user->avatar);
 
         Auth::logout();
 

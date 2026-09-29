@@ -98,8 +98,12 @@
                 
                 @auth
                     <div class="relative ml-2" x-data="{ open: false }">
-                        <button @click="open = !open" class="flex items-center gap-2.5 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium hover:bg-white/20 transition-colors shadow-sm">
-                            <i class="fas fa-user-circle text-lg text-[#FDB813]"></i>
+                        <button @click="open = !open" class="flex items-center gap-2.5 px-3.5 py-1.5 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium hover:bg-white/20 transition-colors shadow-sm">
+                            @if(auth()->user()->avatar_url)
+                                <img src="{{ auth()->user()->avatar_url }}" alt="{{ auth()->user()->name }}" class="w-6 h-6 rounded-full object-cover ring-1 ring-[#FDB813]">
+                            @else
+                                <i class="fas fa-user-circle text-lg text-[#FDB813]"></i>
+                            @endif
                             <span>{{ auth()->user()->name }}</span>
                             <i class="fas fa-chevron-down text-[10px] ml-1" :class="open ? 'rotate-180' : ''" style="transition: transform 0.2s"></i>
                         </button>
@@ -156,6 +160,7 @@
             </button>
             @auth
                 <a href="{{ route('dashboard') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-50"><i class="fas fa-table-columns w-6 text-center text-[#1B6EBB]"></i> Dashboard</a>
+                <a href="{{ route('profile.edit') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-50"><i class="fas fa-user-edit w-6 text-center text-[#1B6EBB]"></i> Pengaturan Profil</a>
                 <hr class="border-slate-100 my-2">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

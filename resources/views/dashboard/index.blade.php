@@ -14,8 +14,12 @@
             
             {{-- User Greeting & Status --}}
             <div class="flex items-center gap-4 sm:gap-5">
-                <div class="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-xl flex-shrink-0">
-                    <i class="fas fa-user-circle text-[#FDB813] text-3xl sm:text-4xl"></i>
+                <div class="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-xl flex-shrink-0 overflow-hidden">
+                    @if($user->avatar_url)
+                        <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
+                    @else
+                        <i class="fas fa-user-circle text-[#FDB813] text-3xl sm:text-4xl"></i>
+                    @endif
                 </div>
                 <div>
                     <div class="flex flex-wrap items-center gap-2 mb-1.5">
