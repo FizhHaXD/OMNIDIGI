@@ -22,7 +22,13 @@
                     <p class="text-white/60 text-sm mt-0.5">Kelola informasi data pribadi dan keamanan akun PLN DIGI Anda</p>
                 </div>
             </div>
-            <div>
+            <div class="flex items-center gap-2">
+                @if($user->isAdmin())
+                    <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#00529C] hover:bg-[#003d75] text-white text-sm font-semibold transition border border-white/20 shadow-sm">
+                        <i class="fas fa-shield-alt text-[#FDB813]"></i>
+                        <span>Panel Admin</span>
+                    </a>
+                @endif
                 <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition backdrop-blur-sm border border-white/10">
                     <i class="fas fa-arrow-left text-xs"></i>
                     <span>Kembali ke Dashboard</span>
@@ -36,6 +42,30 @@
 <section class="py-8 md:py-12 bg-slate-50 min-h-[60vh]">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
+        {{-- Card: Akses Administrator --}}
+        @if($user->isAdmin())
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-5 border-l-4 border-l-[#00529C]">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#00529C] text-xl flex-shrink-0">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-base sm:text-lg font-bold text-slate-900">Panel Administrator</h2>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 uppercase">Akses Khusus</span>
+                        </div>
+                        <p class="text-slate-500 text-xs sm:text-sm mt-0.5">Kelola data pelanggan, tiket gangguan, audit meter, transaksi, dan surat kedinasan AI.</p>
+                    </div>
+                </div>
+                <div>
+                    <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#00529C] hover:bg-[#003d75] text-white text-sm font-bold transition shadow-sm whitespace-nowrap">
+                        <span>Buka Panel Admin</span>
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        @endif
+
         {{-- Card: Informasi Profil --}}
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-6 sm:p-8">
             <div class="max-w-xl">

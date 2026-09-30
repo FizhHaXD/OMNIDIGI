@@ -14,14 +14,15 @@
 
 @layer base {
     body {
-        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
         @apply text-slate-800 bg-white leading-relaxed;
         font-size: 15px;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1, h2, h3, h4, h5, h6, .font-heading, .font-display {
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         @apply font-bold;
-        letter-spacing: -0.01em;
+        letter-spacing: -0.015em;
     }
 }
 

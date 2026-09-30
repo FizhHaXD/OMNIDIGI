@@ -260,22 +260,22 @@
     </div>
 </section>
 
-{{-- ══ STATS ══ --}}
-<section class="py-12 bg-[#2D6DA8]">
+{{-- ══ STATS (REAL-TIME DATA) ══ --}}
+<section class="py-12 bg-[#2D6DA8] relative overflow-hidden">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             @php
-                $stats = [
-                    ['value' => '1M+', 'label' => 'Pelanggan'],
-                    ['value' => '99.9%', 'label' => 'Uptime'],
-                    ['value' => '3 Detik', 'label' => 'Proses Transaksi'],
-                    ['value' => '24/7', 'label' => 'Dukungan'],
+                $stats = $stats ?? [
+                    ['value' => '50+', 'label' => 'Pelanggan Terdaftar'],
+                    ['value' => '99.9%', 'label' => 'Transaksi Sukses'],
+                    ['value' => '90+', 'label' => 'Transaksi Terproses'],
+                    ['value' => '7 Saluran', 'label' => 'Metode Pembayaran'],
                 ];
             @endphp
             @foreach($stats as $s)
-                <div class="text-center">
-                    <p class="text-2xl md:text-3xl font-bold text-white">{{ $s['value'] }}</p>
-                    <p class="text-sm text-white/50 mt-0.5">{{ $s['label'] }}</p>
+                <div class="text-center group">
+                    <p class="text-2xl md:text-3xl font-extrabold text-white tracking-tight font-display group-hover:scale-105 transition-transform duration-200">{{ $s['value'] }}</p>
+                    <p class="text-xs md:text-sm text-white/80 mt-1 font-medium">{{ $s['label'] }}</p>
                 </div>
             @endforeach
         </div>
