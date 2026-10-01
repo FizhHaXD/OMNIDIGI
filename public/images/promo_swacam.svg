@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" fill="none">
+  <defs>
+    <linearGradient id="bg-swacam" x1="0" y1="0" x2="600" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#022c22"/>
+      <stop offset="50%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="phone-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="300" fill="url(#bg-swacam)"/>
+
+  <!-- Subtle Blueprint Grid Lines -->
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <line x1="0" y1="50" x2="600" y2="50"/>
+    <line x1="0" y1="100" x2="600" y2="100"/>
+    <line x1="0" y1="150" x2="600" y2="150"/>
+    <line x1="0" y1="200" x2="600" y2="200"/>
+    <line x1="0" y1="250" x2="600" y2="250"/>
+    <line x1="100" y1="0" x2="100" y2="300"/>
+    <line x1="200" y1="0" x2="200" y2="300"/>
+    <line x1="300" y1="0" x2="300" y2="300"/>
+    <line x1="400" y1="0" x2="400" y2="300"/>
+    <line x1="500" y1="0" x2="500" y2="300"/>
+  </g>
+
+  <!-- Left Side: Clean Typography & Badge -->
+  <g transform="translate(45, 65)">
+    <!-- Small Category Badge -->
+    <rect width="135" height="24" rx="12" fill="#FDB813"/>
+    <text x="14" y="16" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="900" fill="#022C22" letter-spacing="0.5">FITUR SWACAM</text>
+    
+    <!-- Title -->
+    <text x="0" y="60" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="800" fill="#FFFFFF">Catat Meter Mandiri</text>
+    <text x="0" y="88" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="700" fill="#6EE7B7">Tagihan Lebih Akurat</text>
+    
+    <!-- Short Info -->
+    <text x="0" y="122" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#A7F3D0">Kirim foto angka stand meteran Anda</text>
+    <text x="0" y="140" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#A7F3D0">setiap tgl 24-27 langsung dari smartphone.</text>
+
+    <!-- Key metric chip -->
+    <g transform="translate(0, 160)">
+      <rect width="180" height="28" rx="6" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-opacity="0.15"/>
+      <circle cx="16" cy="14" r="4" fill="#34D399"/>
+      <text x="28" y="18" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600" fill="#E2E8F0">Praktis &amp; Real-time</text>
+    </g>
+  </g>
+
+  <!-- Right Side: Smartphone scanning Meter LCD -->
+  <g transform="translate(385, 40)">
+    <!-- Phone Body -->
+    <rect width="135" height="220" rx="20" fill="url(#phone-body)" stroke="#334155" stroke-width="3"/>
+    <rect x="8" y="8" width="119" height="204" rx="14" fill="#0f172a"/>
+    <!-- Phone Notch -->
+    <rect x="42" y="12" width="50" height="8" rx="4" fill="#1e293b"/>
+
+    <!-- Camera Viewfinder Area -->
+    <rect x="14" y="32" width="107" height="150" rx="8" fill="#064e3b" fill-opacity="0.5" stroke="#10b981" stroke-width="1.5" stroke-dasharray="8 4"/>
+
+    <!-- Viewfinder Brackets -->
+    <path d="M22 45h10 M22 45v10" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M113 45h-10 M113 45v10" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M22 165h10 M22 165v-10" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M113 165h-10 M113 165v-10" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Target Meter Inside Phone -->
+    <rect x="25" y="70" width="85" height="45" rx="5" fill="#022c22" stroke="#10B981" stroke-width="1"/>
+    <text x="35" y="96" font-family="monospace" font-size="14" font-weight="bold" fill="#34D399">01248.9</text>
+    <text x="88" y="108" font-family="sans-serif" font-size="7" font-weight="bold" fill="#10B981">kWh</text>
+
+    <!-- Scan Line -->
+    <line x1="20" y1="92" x2="115" y2="92" stroke="#EF4444" stroke-width="1.5" stroke-opacity="0.8"/>
+
+    <!-- Status badge below -->
+    <rect x="24" y="130" width="87" height="20" rx="10" fill="#10B981"/>
+    <text x="67" y="143" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="800" fill="#022C22" text-anchor="middle">✓ FOKUS AKURAT</text>
+
+    <!-- Shutter Button -->
+    <circle cx="67" cy="195" r="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  </g>
+</svg>

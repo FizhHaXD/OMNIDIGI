@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" fill="none">
+  <defs>
+    <linearGradient id="bg-rewards" x1="0" y1="0" x2="600" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#311042"/>
+    </linearGradient>
+    <linearGradient id="coin-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="60%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <linearGradient id="box-purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#6D28D9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="300" fill="url(#bg-rewards)"/>
+
+  <!-- Subtle Blueprint Grid Lines -->
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <line x1="0" y1="50" x2="600" y2="50"/>
+    <line x1="0" y1="100" x2="600" y2="100"/>
+    <line x1="0" y1="150" x2="600" y2="150"/>
+    <line x1="0" y1="200" x2="600" y2="200"/>
+    <line x1="0" y1="250" x2="600" y2="250"/>
+    <line x1="100" y1="0" x2="100" y2="300"/>
+    <line x1="200" y1="0" x2="200" y2="300"/>
+    <line x1="300" y1="0" x2="300" y2="300"/>
+    <line x1="400" y1="0" x2="400" y2="300"/>
+    <line x1="500" y1="0" x2="500" y2="300"/>
+  </g>
+
+  <!-- Left Side: Clean Typography & Badge -->
+  <g transform="translate(45, 65)">
+    <!-- Small Category Badge -->
+    <rect width="135" height="24" rx="12" fill="#FDB813"/>
+    <text x="14" y="16" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="900" fill="#1E1B4B" letter-spacing="0.5">DIGIPOINTS 2026</text>
+    
+    <!-- Title -->
+    <text x="0" y="60" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="800" fill="#FFFFFF">Poin Reward Pelanggan</text>
+    <text x="0" y="88" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="700" fill="#FDB813">Tukar Voucher &amp; Hadiah</text>
+    
+    <!-- Short Info -->
+    <text x="0" y="122" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#94A3B8">Bayar tagihan listrik tepat waktu &amp;</text>
+    <text x="0" y="140" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#94A3B8">dapatkan koin reward tiap transaksi.</text>
+
+    <!-- Key metric chip -->
+    <g transform="translate(0, 160)">
+      <rect width="180" height="28" rx="6" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-opacity="0.15"/>
+      <circle cx="16" cy="14" r="4" fill="#38BDF8"/>
+      <text x="28" y="18" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600" fill="#E2E8F0">Cashback Token Listrik</text>
+    </g>
+  </g>
+
+  <!-- Right Side: Gift Box & Gold Coins Illustration -->
+  <g transform="translate(370, 45)">
+    <!-- Outer Card Frame -->
+    <rect width="170" height="210" rx="18" fill="#1e1b4b" stroke="#3730a3" stroke-width="2.5"/>
+    <rect x="10" y="10" width="150" height="190" rx="12" fill="#131036" stroke="#252063" stroke-width="1.5"/>
+
+    <!-- Floating Coins -->
+    <circle cx="50" cy="55" r="20" fill="url(#coin-gold)" stroke="#FEF08A" stroke-width="2"/>
+    <text x="50" y="62" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="900" fill="#78350F" text-anchor="middle">P</text>
+
+    <circle cx="120" cy="70" r="15" fill="url(#coin-gold)" stroke="#FEF08A" stroke-width="1.5"/>
+    <text x="120" y="75" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="900" fill="#78350F" text-anchor="middle">P</text>
+
+    <!-- Gift Box Base -->
+    <rect x="35" y="115" width="100" height="70" rx="10" fill="url(#box-purple)" stroke="#A78BFA" stroke-width="1.5"/>
+    <!-- Lid -->
+    <rect x="30" y="100" width="110" height="20" rx="6" fill="#7C3AED" stroke="#C4B5FD" stroke-width="1.5"/>
+    <!-- Gold Ribbon Vertical -->
+    <rect x="77" y="100" width="16" height="85" fill="#FDB813"/>
+    <!-- Gold Ribbon Bow -->
+    <ellipse cx="73" cy="95" rx="12" ry="7" fill="#FDB813" transform="rotate(-25 73 95)"/>
+    <ellipse cx="97" cy="95" rx="12" ry="7" fill="#FDB813" transform="rotate(25 97 95)"/>
+    <circle cx="85" cy="97" r="5" fill="#F59E0B"/>
+
+    <!-- Sparkles -->
+    <path d="M40 90l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#FDE047"/>
+    <path d="M130 110l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z" fill="#38BDF8"/>
+  </g>
+</svg>

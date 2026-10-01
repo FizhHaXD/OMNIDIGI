@@ -132,8 +132,7 @@ OMNIDIGI/
 ├── routes/
 │   ├── web.php                         # Definisi rute aplikasi
 │   └── auth.php                        # Rute autentikasi Breeze
-├── DATABASE_ERD.md                     # Dokumentasi skema relasi database (3NF)
-├── INSTALLATION.md                     # Panduan setup & deployment lokal
+├── docs/                               # Pusat dokumentasi terpadu (Step 1 s/d Step 8)
 └── README.md                           # Dokumentasi utama proyek
 ```
 
@@ -164,9 +163,10 @@ Database seeder telah menyediakan data awal yang siap digunakan untuk keperluan 
 ## Panduan Cepat Menjalankan Proyek
 
 ```bash
-# 1. Clone repositori
+# 1. Clone repositori & checkout branch aktif
 git clone https://github.com/FizhHaXD/OMNIDIGI.git
 cd OMNIDIGI
+git checkout feature/plndigi-v2
 
 # 2. Install dependensi backend dan frontend
 composer install
@@ -176,8 +176,10 @@ npm install
 cp .env.example .env
 php artisan key:generate
 
-# 4. Migrasi database dan isi data awal
+# 4. Migrasi database dan isi data awal (beserta 50 dummy user lengkap)
 php artisan migrate:fresh --seed
+php artisan db:seed --class=DummyUsers50Seeder
+php artisan storage:link
 
 # 5. Build aset frontend
 npm run build
@@ -195,12 +197,14 @@ Aplikasi dapat dibuka pada browser melalui tautan: `http://127.0.0.1:8000`
 Seluruh dokumentasi teknis dan panduan operasional proyek telah diorganisir secara terstruktur di dalam direktori [`docs/`](docs/):
 
 * **[Pusat Dokumentasi Step-by-Step (docs/README.md)](docs/README.md)** — Indeks navigasi seluruh dokumen dan alur pemahaman proyek.
-* **[01. Panduan Instalasi (docs/01-INSTALLATION.md)](docs/01-INSTALLATION.md)** — Langkah instalasi mendalam, konfigurasi database MySQL, dan solusi kendala teknis.
+* **[01. Panduan Instalasi (docs/01-INSTALLATION.md)](docs/01-INSTALLATION.md)** — Langkah instalasi mendalam, konfigurasi database MySQL/SQLite, troubleshooting, dan panduan lengkap.
 * **[02. Database ERD (docs/02-DATABASE-ERD.md)](docs/02-DATABASE-ERD.md)** — Detail struktur tabel, tipe data, relasi kunci (*foreign keys*), dan normalisasi 3NF.
 * **[03. 50 Data Dummy User (docs/03-DUMMY-USERS.md)](docs/03-DUMMY-USERS.md)** — Daftar 50 akun dummy, 8 skenario pengujian, dan file SQL.
 * **[04. Color Palette & UI Tokens (docs/04-COLOR-PALETTE.md)](docs/04-COLOR-PALETTE.md)** — Panduan warna korporat PLN, gradien, tipografi, dan UI Kit.
 * **[05. Feature Changelog (docs/05-FEATURE-CHANGELOG.md)](docs/05-FEATURE-CHANGELOG.md)** — Catatan perbaikan bug dan penambahan fitur terbaru.
 * **[06. Panduan Data Admin (docs/06-ADMIN-DATA-GUIDE.md)](docs/06-ADMIN-DATA-GUIDE.md)** — Pemetaan 11 tabel database, alur CRUD user, dan kueri Eloquent untuk panel admin.
+* **[07. Sistem AI & Surat Kedinasan Admin (docs/07-ADMIN-AI-DOCUMENT-SYSTEM.md)](docs/07-ADMIN-AI-DOCUMENT-SYSTEM.md)** — Integrasi AI Agent generator surat peringatan & penugasan dinas resmi.
+* **[08. Full Changelog Branch V2 (docs/08-BRANCH-V2-FULL-CHANGELOG.md)](docs/08-BRANCH-V2-FULL-CHANGELOG.md)** — Rekap komprehensif seluruh pembaruan, refactoring, dan fitur baru pada branch V2.
 
 ---
 

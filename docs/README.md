@@ -17,6 +17,7 @@ Urutan membaca dan implementasi yang direkomendasikan:
 | **Step 5** | [🚀 `05-FEATURE-CHANGELOG.md`](05-FEATURE-CHANGELOG.md) | **Log Fitur & Perbaikan Sistem Terkini**<br>Dokumentasi penyelesaian bug Self Metering (SwaCAM), PLN Point Reward, Monitoring kWh & Biaya, Simulasi Keuangan, Alur Pembayaran Cepat, Widget Token Stroom, Halaman Profil Baru, dan Redesign Registrasi Akun. |
 | **Step 6** | [🛡️ `06-ADMIN-DATA-GUIDE.md`](06-ADMIN-DATA-GUIDE.md) | **Panduan Data untuk Admin Dashboard**<br>Dokumentasi lengkap 11 tabel database, kolom, relasi, data yang masuk dari setiap CRUD user, contoh Eloquent query, dan status fitur admin yang sudah ada vs belum. Referensi utama untuk tim yang membangun dashboard admin. |
 | **Step 7** | [⚡ `07-ADMIN-AI-DOCUMENT-SYSTEM.md`](07-ADMIN-AI-DOCUMENT-SYSTEM.md) | **Sistem Dashboard Admin & Integrasi AI Agent Surat Kedinasan**<br>Dokumentasi lengkap arsitektur klasifikasi operasional (Aging Overdue SP-1/SP-2/SPK, Severity Outages YANTEK, Anomali SwaCAM), jembatan AI Agent (Prompt & JSON Schema), preview cetak A4 resmi, dan bedah kode sumber controller & views. |
+| **Step 8** | [📋 `08-BRANCH-V2-FULL-CHANGELOG.md`](08-BRANCH-V2-FULL-CHANGELOG.md) | **Full Changelog & Rekapitulasi Branch V2**<br>Dokumentasi komprehensif seluruh fitur baru, refactoring kode, peningkatan keamanan, perbaikan bug UI/UX, dan penyempurnaan database pada rilis v2. |
 
 ---
 

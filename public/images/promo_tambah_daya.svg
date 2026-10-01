@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" fill="none">
+  <defs>
+    <linearGradient id="bg-tambah-daya" x1="0" y1="0" x2="600" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#001845"/>
+      <stop offset="55%" stop-color="#023e8a"/>
+      <stop offset="100%" stop-color="#0077b6"/>
+    </linearGradient>
+    <linearGradient id="gold-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFE066"/>
+      <stop offset="100%" stop-color="#FDB813"/>
+    </linearGradient>
+    <filter id="glow-bolt" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="300" fill="url(#bg-tambah-daya)"/>
+
+  <!-- Subtle Blueprint Grid Lines -->
+  <g stroke="#ffffff" stroke-opacity="0.06" stroke-width="1">
+    <line x1="0" y1="50" x2="600" y2="50"/>
+    <line x1="0" y1="100" x2="600" y2="100"/>
+    <line x1="0" y1="150" x2="600" y2="150"/>
+    <line x1="0" y1="200" x2="600" y2="200"/>
+    <line x1="0" y1="250" x2="600" y2="250"/>
+    <line x1="100" y1="0" x2="100" y2="300"/>
+    <line x1="200" y1="0" x2="200" y2="300"/>
+    <line x1="300" y1="0" x2="300" y2="300"/>
+    <line x1="400" y1="0" x2="400" y2="300"/>
+    <line x1="500" y1="0" x2="500" y2="300"/>
+  </g>
+
+  <!-- Left Side: Clean Typography & Badge -->
+  <g transform="translate(45, 65)">
+    <!-- Small Category Badge -->
+    <rect width="140" height="24" rx="12" fill="#FDB813"/>
+    <text x="14" y="16" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="900" fill="#001845" letter-spacing="0.5">PROMO SPESIAL 2026</text>
+    
+    <!-- Title -->
+    <text x="0" y="60" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="800" fill="#FFFFFF">Diskon Tambah Daya</text>
+    <text x="0" y="88" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="700" fill="#FDB813">Hemat Hingga 50%</text>
+    
+    <!-- Short Info -->
+    <text x="0" y="122" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#94A3B8">Tingkatkan daya listrik rumah &amp; usaha</text>
+    <text x="0" y="140" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#94A3B8">lebih mudah, praktis, dan hemat biaya.</text>
+
+    <!-- Key metric chip -->
+    <g transform="translate(0, 160)">
+      <rect width="180" height="28" rx="6" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-opacity="0.15"/>
+      <circle cx="16" cy="14" r="4" fill="#FDB813"/>
+      <text x="28" y="18" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600" fill="#E2E8F0">S/d Daya 5.500 VA</text>
+    </g>
+  </g>
+
+  <!-- Right Side: Power Gauge & Upgrade Visual -->
+  <g transform="translate(370, 45)">
+    <!-- Card Frame -->
+    <rect width="170" height="210" rx="18" fill="#0b1b38" stroke="#1e3a6d" stroke-width="2.5"/>
+    <rect x="10" y="10" width="150" height="190" rx="12" fill="#08142b" stroke="#172b50" stroke-width="1.5"/>
+
+    <!-- Circular Power Dial -->
+    <circle cx="85" cy="85" r="50" stroke="#1e3a6d" stroke-width="10" fill="none"/>
+    <circle cx="85" cy="85" r="50" stroke="url(#gold-grad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="230 314" fill="none" transform="rotate(-90 85 85)"/>
+
+    <!-- Center Lightning -->
+    <circle cx="85" cy="85" r="34" fill="#001845" stroke="#FDB813" stroke-width="2"/>
+    <path d="M88 64l-12 18h9l-5 18 16-22h-10l5-14z" fill="#FDB813" filter="url(#glow-bolt)"/>
+
+    <!-- Tag Diskon 50% -->
+    <rect x="35" y="142" width="100" height="24" rx="12" fill="#E11D48"/>
+    <text x="85" y="158" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="900" fill="#FFFFFF" text-anchor="middle">HEMAT 50%</text>
+
+    <!-- Stepper Text -->
+    <g transform="translate(25, 178)">
+      <text x="8" y="9" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#64748B">900 VA</text>
+      <text x="50" y="9" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#38BDF8">➔</text>
+      <text x="70" y="9" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="800" fill="#34D399">5.500 VA</text>
+    </g>
+  </g>
+</svg>

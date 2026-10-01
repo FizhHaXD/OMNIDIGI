@@ -679,28 +679,189 @@
                     <p class="text-xs text-slate-500 font-medium">Inovasi kelistrikan ramah lingkungan dan edukasi PLN</p>
                 </div>
 
-                {{-- Promo Banner Card with Clean Vector SVG Asset --}}
-                <div class="card overflow-hidden border border-slate-200 shadow-lg rounded-3xl group bg-white relative">
+                {{-- Promo Banner Carousel Card with Auto-Slide & Touch Support --}}
+                <div x-data="{
+                    active: 0,
+                    total: 4,
+                    progress: 0,
+                    progressTimer: null,
+                    touchStartX: 0,
+                    duration: 5000,
+                    startAutoSlide() {
+                        this.stopAutoSlide();
+                        const interval = 50;
+                        const step = (interval / this.duration) * 100;
+                        this.progressTimer = setInterval(() => {
+                            this.progress += step;
+                            if (this.progress >= 100) {
+                                this.next();
+                            }
+                        }, interval);
+                    },
+                    stopAutoSlide() {
+                        if (this.progressTimer) {
+                            clearInterval(this.progressTimer);
+                            this.progressTimer = null;
+                        }
+                    },
+                    next() {
+                        this.active = (this.active + 1) % this.total;
+                        this.progress = 0;
+                    },
+                    prev() {
+                        this.active = (this.active - 1 + this.total) % this.total;
+                        this.progress = 0;
+                    },
+                    goTo(index) {
+                        this.active = index;
+                        this.progress = 0;
+                    }
+                }"
+                x-init="startAutoSlide()"
+                @mouseenter="stopAutoSlide()"
+                @mouseleave="startAutoSlide()"
+                @touchstart.passive="touchStartX = $event.changedTouches[0].screenX"
+                @touchend.passive="if ($event.changedTouches[0].screenX < touchStartX - 40) next(); if ($event.changedTouches[0].screenX > touchStartX + 40) prev();"
+                class="card overflow-hidden border border-slate-200 shadow-lg rounded-3xl group bg-white relative">
+                    
                     {{-- Aesthetic Circle Accent --}}
-                    <div class="absolute -top-10 -right-10 w-36 h-36 rounded-full bg-blue-100/40 pointer-events-none"></div>
+                    <div class="absolute -top-10 -right-10 w-36 h-36 rounded-full bg-blue-100/40 pointer-events-none z-0"></div>
 
-                    <div class="relative h-48 overflow-hidden bg-[#001a4d]">
-                        <img src="{{ asset('images/smart_meter_banner.svg') }}" alt="PLN Smart Grid AMI" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    {{-- Top Progress Bar --}}
+                    <div class="h-1 w-full bg-slate-100 overflow-hidden relative z-20">
+                        <div class="h-full bg-gradient-to-r from-[#00529C] to-[#FDB813] transition-all duration-75"
+                             :style="`width: ${progress}%;`"></div>
                     </div>
-                    <div class="p-5 bg-white relative z-10">
-                        <h4 class="text-base font-black text-slate-900 mb-1 group-hover:text-[#00529C] transition-colors leading-tight">
-                            KWh Meter Pintar (Advanced Metering)
-                        </h4>
-                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                            Tingkatkan efisiensi energi dengan pembacaan meter otomatis tanpa perlu didatangi petugas pencatat meter.
-                        </p>
-                        <div class="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
-                            <span class="text-slate-400 font-semibold">Bantuan Resmi: Call 123</span>
-                            <a href="tel:123" class="font-extrabold text-[#00529C] hover:underline flex items-center gap-1.5">
-                                Hubungi Kami <i class="fas fa-phone-alt text-[10px]"></i>
-                            </a>
+
+                    {{-- Floating Badge Slide Counter --}}
+                    <div class="absolute top-4 right-4 z-20 px-2.5 py-1 rounded-full bg-slate-900/60 backdrop-blur-md text-[10px] font-bold text-white tracking-wider flex items-center gap-1.5 border border-white/20 shadow-sm">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span x-text="active + 1"></span>/<span x-text="total"></span>
+                    </div>
+
+                    {{-- Navigation Arrows (Visible on hover & touch) --}}
+                    <button @click="prev()" 
+                            class="absolute left-2 top-[88px] -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-all duration-200 z-20 shadow-md active:scale-90"
+                            aria-label="Previous Slide">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button @click="next()" 
+                            class="absolute right-2 top-[88px] -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-all duration-200 z-20 shadow-md active:scale-90"
+                            aria-label="Next Slide">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    {{-- Slider Track --}}
+                    <div class="relative overflow-hidden z-10">
+                        <div class="flex transition-transform duration-500 ease-out"
+                             :style="`transform: translateX(-${active * 100}%);`">
+
+                            {{-- Slide 1: Smart Meter AMI --}}
+                            <div class="w-full flex-shrink-0">
+                                <div class="relative h-48 overflow-hidden bg-[#001a4d]">
+                                    <img src="{{ asset('images/smart_meter_banner.svg') }}" alt="PLN Smart Grid AMI" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="p-5 bg-white">
+                                    <h4 class="text-base font-black text-slate-900 mb-1 leading-tight line-clamp-1 group-hover:text-[#00529C] transition-colors">
+                                        KWh Meter Pintar (Advanced Metering)
+                                    </h4>
+                                    <p class="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2 min-h-[34px]">
+                                        Tingkatkan efisiensi energi dengan pembacaan meter otomatis tanpa perlu didatangi petugas pencatat meter.
+                                    </p>
+                                    <div class="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
+                                        <span class="text-slate-400 font-semibold flex items-center gap-1.5">
+                                            <i class="fas fa-microchip text-blue-500"></i> Smart Grid AMI
+                                        </span>
+                                        <a href="{{ route('dashboard.monitoring') }}" class="font-extrabold text-[#00529C] hover:text-[#003B70] flex items-center gap-1.5 group-hover:translate-x-0.5 transition">
+                                            Monitoring <i class="fas fa-arrow-right text-[10px]"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Slide 2: Promo Tambah Daya --}}
+                            <div class="w-full flex-shrink-0">
+                                <div class="relative h-48 overflow-hidden bg-[#001845]">
+                                    <img src="{{ asset('images/promo_tambah_daya.svg') }}" alt="Promo Tambah Daya PLN" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="p-5 bg-white">
+                                    <h4 class="text-base font-black text-slate-900 mb-1 leading-tight line-clamp-1 group-hover:text-[#00529C] transition-colors">
+                                        Promo Diskon Tambah Daya 2026
+                                    </h4>
+                                    <p class="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2 min-h-[34px]">
+                                        Daya listrik rumah sering turun? Ajukan tambah daya hingga 5.500 VA hemat s/d 50% via PLN DIGI.
+                                    </p>
+                                    <div class="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
+                                        <span class="text-slate-400 font-semibold flex items-center gap-1.5">
+                                            <i class="fas fa-bolt text-amber-500"></i> Diskon s/d 50%
+                                        </span>
+                                        <a href="{{ route('simulasi') }}" class="font-extrabold text-[#00529C] hover:text-[#003B70] flex items-center gap-1.5 group-hover:translate-x-0.5 transition">
+                                            Simulasi <i class="fas fa-arrow-right text-[10px]"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Slide 3: DigiPoints & Rewards --}}
+                            <div class="w-full flex-shrink-0">
+                                <div class="relative h-48 overflow-hidden bg-[#0f172a]">
+                                    <img src="{{ asset('images/promo_rewards.svg') }}" alt="DigiPoints & Reward PLN" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="p-5 bg-white">
+                                    <h4 class="text-base font-black text-slate-900 mb-1 leading-tight line-clamp-1 group-hover:text-[#00529C] transition-colors">
+                                        DigiPoints &amp; Reward Pelanggan
+                                    </h4>
+                                    <p class="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2 min-h-[34px]">
+                                        Bayar tagihan listrik tepat waktu sebelum tgl 20 setiap bulan, kumpulkan poin reward &amp; tukar voucher token.
+                                    </p>
+                                    <div class="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
+                                        <span class="text-slate-400 font-semibold flex items-center gap-1.5">
+                                            <i class="fas fa-gift text-purple-500"></i> Poin Reward
+                                        </span>
+                                        <a href="{{ route('dashboard.reward') }}" class="font-extrabold text-[#00529C] hover:text-[#003B70] flex items-center gap-1.5 group-hover:translate-x-0.5 transition">
+                                            Tukar Poin <i class="fas fa-arrow-right text-[10px]"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Slide 4: SwaCAM (Catat Meter Mandiri) --}}
+                            <div class="w-full flex-shrink-0">
+                                <div class="relative h-48 overflow-hidden bg-[#022c22]">
+                                    <img src="{{ asset('images/promo_swacam.svg') }}" alt="Catat Meter Mandiri SwaCAM" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="p-5 bg-white">
+                                    <h4 class="text-base font-black text-slate-900 mb-1 leading-tight line-clamp-1 group-hover:text-[#00529C] transition-colors">
+                                        Catat Meter Mandiri (SwaCAM)
+                                    </h4>
+                                    <p class="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2 min-h-[34px]">
+                                        Foto dan kirim angka stand kWh meter Anda secara praktis tiap tanggal 24-27 untuk tagihan lebih akurat.
+                                    </p>
+                                    <div class="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
+                                        <span class="text-slate-400 font-semibold flex items-center gap-1.5">
+                                            <i class="fas fa-camera text-emerald-500"></i> SwaCAM Bulanan
+                                        </span>
+                                        <a href="{{ route('dashboard.metering') }}" class="font-extrabold text-[#00529C] hover:text-[#003B70] flex items-center gap-1.5 group-hover:translate-x-0.5 transition">
+                                            Catat Meter <i class="fas fa-arrow-right text-[10px]"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
+
+                    {{-- Carousel Indicator Dots (Bottom) --}}
+                    <div class="flex items-center justify-center gap-1.5 pb-4 bg-white relative z-20">
+                        <template x-for="i in total" :key="i">
+                            <button @click="goTo(i - 1)" 
+                                    :class="active === (i - 1) ? 'w-6 bg-[#00529C]' : 'w-2 bg-slate-200 hover:bg-slate-300'"
+                                    class="h-2 rounded-full transition-all duration-300 focus:outline-none"
+                                    :aria-label="'Pergi ke slide ' + i">
+                            </button>
+                        </template>
+                    </div>
+
                 </div>
 
                 {{-- Bantuan Call Center Mini Box with Aesthetic Circle --}}
