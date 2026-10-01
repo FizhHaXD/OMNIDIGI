@@ -7,7 +7,7 @@
 * **Presenter:** M. Hafizh Wijdan (`@202431005_M Hafizh Wijdan`)
 * **Tanggung Jawab Modul:** Backoffice Command Center, CRM Pelanggan, Intelligent Operations, AI Document Engine
 * **Alokasi Presentasi:** 4 Slide Penuh (Bagian Admin / Sistem Operasional)
-* **Estimasi Durasi:** 4 Hingga 5 Menit (Mendalam, Terstruktur, dan Berbobot)
+* **Estimasi Durasi Bicara:** 4 Hingga 5 Menit (Mendalam, Lengkap & Terstruktur)
 * **Target Audiens:** Dewan Juri Lomba Inovasi PLN Digital, Praktisi Sistem Informasi BUMN, dan Akademisi
 * **Karakter Penyampaian:** Tenang, percaya diri, berbasis fakta teknis, menguasai arsitektur dan baris kode, tanpa retorika klise.
 
@@ -25,17 +25,35 @@
 
 ---
 
+## RINGKASAN EKSEKUTIF: KORELASI FITUR SISI USER DENGAN SISTEM ADMIN BACKOFFICE
+
+Tabel berikut merangkum korelasi langsung antara aksi yang dilakukan pelanggan pada antarmuka publik/dashboard user dengan modul pengolahan, audit, dan otomasi yang berjalan di sisi admin backoffice:
+
+| No | Modul / Fitur Layanan | Aktivitas di Sisi Pengguna (User Dashboard) | Pengolahan di Sisi Backoffice (Admin System) |
+|---|---|---|---|
+| **1** | **Pembayaran Tagihan Pascabayar** | Melihat rincian stand meter, tarif per kWh, dan membayar via QRIS/VA/E-Wallet sebelum tanggal 20. | Rekapitulasi arus kas harian, update status rekening, dan evaluasi Aging Overdue Matrix untuk penagihan bertingkat. |
+| **2** | **Pembelian Token Listrik** | Memilih denominasi token Rp 20.000 s/d Rp 1.000.000, menerima 20 digit kode stroom unik instan. | Audit transaksi penjualan token, pencocokan nomor meter pelanggan, dan jaminan ketiadaan duplikasi nomor referensi. |
+| **3** | **Catat Meter Mandiri (SwaCAM)** | Mengunggah foto dan menginput angka stand meteran fisik setiap tanggal 24 s/d 27. | Algoritma audit anomali memfilter lonjakan konsumsi >400 kWh atau penurunan drastis sebelum tagihan dicetak. |
+| **4** | **Pelaporan Gangguan (Outages)** | Melaporkan pemadaman atau kerusakan instalasi dengan foto dan memantau status tiket secara real-time. | Triase keparahan otomatis (Kritis vs Normal), penerbitan SPK YANTEK, dispatch teknisi lapangan, dan update status tiket. |
+| **5** | **Poin Loyalitas (DigiPoints)** | Menerima poin reward otomatis dari pembayaran tepat waktu dan menukarnya dengan voucher token. | Otomasi validasi kupon pemotongan tagihan, audit saldo poin pengguna, dan pencegahan klaim ganda. |
+| **6** | **Simulasi Biaya & Pasang Baru** | Menghitung estimasi Biaya Pasang (BP) + PPN 11% dan simulasi beban watt peranti elektronik rumah. | Master data tarif ESDM tersinkronisasi, dasar penerbitan tagihan penyambungan baru oleh petugas administrasi. |
+| **7** | **Generator Surat Kedinasan** | Menerima surat peringatan (SP-1/SP-2) atau notifikasi resmi penugasan teknisi. | Otomasi penerbitan naskah dinas resmi PLN berstandar A4 siap cetak dan export JSON Schema siap integrasi AI Agent/WA. |
+
+---
+
 ## NASKAH LENGKAP KATA PER KATA (VERBATIM SPEECH SCRIPT)
 
 ### BAGIAN 0: TRANSISI ESTAFET & PEMBUKA MASALAH OPERASIONAL
-**Estimasi Waktu:** ~25 Detik  
+**Estimasi Waktu:** ~30 Detik  
 **Panduan Penyampaian:** Berikan apresiasi singkat kepada rekan tim sebelumnya. Tatap dewan juri dengan postur tegak, intonasi tenang, dan suara yang jelas.
 
 > "Terima kasih atas pemaparan komprehensif dari rekan saya mengenai perancangan antarmuka dan pengalaman pengguna di sisi publik.
 >
 > Selamat pagi/siang kepada Bapak dan Ibu Dewan Juri yang saya hormati. Nama saya M. Hafizh Wijdan, dan saya bertanggung jawab atas perancangan arsitektur backoffice, integritas basis data, serta modul operasional admin pada platform PLN DIGI.
 >
-> Di ranah industri utilitas kelistrikan berskala nasional, antarmuka pelanggan yang menarik hanyalah sebagian kecil dari ekosistem digital. Pertanyaan terbesarnya adalah: bagaimana sistem di balik layar mampu menangani konsistensi finansial dari ratusan ribu transaksi, mengklasifikasi penagihan pelanggan yang menunggak secara otomatis, melakukan triase pemadaman darurat, serta menerbitkan dokumen hukum kedinasan resmi tanpa celah kesalahan manusia? Dalam empat slide ke depan, saya akan membedah bagaimana Backoffice Command Center PLN DIGI menjawab seluruh tantangan teknis dan operasional tersebut secara terukur."
+> Di ranah industri utilitas kelistrikan berskala nasional, antarmuka pelanggan yang menarik hanyalah sebagian kecil dari ekosistem digital. Setiap kali pelanggan menekan tombol 'Bayar Tagihan', membeli token listrik, atau melaporkan pemadaman di dashboard mereka, terdapat proses bisnis kompleks yang harus diproses di sisi backoffice: mulai dari audit transaksi finansial, klasifikasi penagihan bertingkat untuk pelanggan menunggak, triase penugasan teknisi lapangan, hingga penerbitan dokumen hukum kedinasan resmi tanpa celah kesalahan manusia.
+>
+> Dalam empat slide ke depan, saya akan membedah bagaimana Backoffice Command Center PLN DIGI bekerja sebagai otak operasional yang menghubungkan seluruh aktivitas pengguna ke dalam sistem tata kelola kelistrikan modern yang terukur dan patuh regulasi."
 
 ---
 
@@ -66,22 +84,20 @@ public function dashboard()
     ];
 
     $recentTransactions = Transaction::with(['user', 'customer', 'paymentMethod'])
-        ->latest()
-        ->take(8)
-        ->get();
+        ->latest()->take(8)->get();
 
     return view('admin.dashboard', compact('stats', 'recentTransactions'));
 }
 ```
-*Catatan Teknis Arsitektur:* Pemanggilan metode `with(['user', 'customer', 'paymentMethod'])` menerapkan teknik Eager Loading pada Eloquent ORM. Pendekatan ini mengeliminasi masalah N+1 Query secara mendasar, menjaga waktu eksekusi database tetap di bawah 50 milidetik pada saat memuat data transaksi.
+*Catatan Teknis Arsitektur:* Pemanggilan metode `with(['user', 'customer', 'paymentMethod'])` menerapkan teknik Eager Loading pada Eloquent ORM. Pendekatan ini mengeliminasi masalah N+1 Query secara mendasar, menjaga waktu eksekusi database tetap di bawah 50 milidetik saat memuat data transaksi.
 
 ---
 
 ### BAGIAN 2: SLIDE 2 — INTELLIGENT OPERATIONS: PENAGIHAN BERTINGKAT & TRIASE LAPANGAN
 **Estimasi Waktu:** ~75 Detik  
-**Panduan Penyampaian:** Maju satu langkah ke depan. Tekankan tiga pilar otomasi: Aging Overdue, Triase YANTEK, dan Audit SwaCAM.
+**Panduan Penyampaian:** Maju satu langkah ke depan. Tekankan tiga pilar otomasi yang terhubung dengan tindakan user: Aging Overdue, Triase YANTEK, dan Audit SwaCAM.
 
-> "Melangkah ke Slide kedua, kami merancang agar dashboard admin tidak bersikap pasif hanya menampilkan baris tabel, melainkan aktif menjalankan business logic operasional PLN secara otomatis. Modul Intelligent Operations ini ditopang oleh tiga pilar utama:
+> "Melangkah ke Slide kedua, kami merancang agar dashboard admin tidak bersikap pasif hanya menampilkan baris tabel, melainkan aktif menjalankan business logic operasional PLN secara otomatis. Modul Intelligent Operations ini ditopang oleh tiga pilar utama yang saling terhubung dengan dashboard user:
 >
 > Pilar pertama adalah Aging Overdue Matrix untuk manajemen tagihan pascabayar. Siklus tagihan listrik PLN memiliki batasan ketat: tanggal 20 merupakan batas akhir pembayaran setiap bulannya. Controller kami menerapkan query scope dinamis berbasis tanggal server. Setiap rekening yang melewati tanggal 20 otomatis berpindah ke status Overdue, disertai kalkulasi denda keterlambatan secara otomatis. Sistem kemudian memetakan pelanggan tersebut ke dalam pipeline penagihan bertingkat: dimulai dari Surat Peringatan 1 (SP-1) untuk penunggakan awal, Surat Peringatan 2 (SP-2) untuk penunggakan berulang, hingga penerbitan Surat Perintah Kerja (SPK) untuk pemutusan sementara instalasi kelistrikan.
 >
@@ -140,14 +156,13 @@ $nomorSurat = match ($type) {
 };
 ```
 ```css
-/* 2. CSS Paged Media Standard Layout A4 Resmi Tanpa Dependency Tambahan */
+/* 2. CSS Paged Media Standard Layout A4 Resmi */
 @media print {
     @page { size: A4 portrait; margin: 15mm 20mm; }
     body { background: white; font-family: 'Times New Roman', serif; }
     .no-print { display: none !important; }
 }
 ```
-*Catatan Teknis Arsitektur:* Struktur naskah dinas mengacu pada anatomi formal surat dinas: Kepala Surat (Kop Resmi BUMN), Pembuka (Nomor & Lampiran), Isi Konsideran (Hukum ESDM & Rincian Tagihan), serta Kaki Surat (Tanda Tangan & QR Verifikasi).
 
 ---
 
@@ -184,7 +199,6 @@ $table->foreignId('tariff_id')->constrained('tariffs')->onDelete('restrict');
     <button @click="window.print()">Cetak Dokumen A4</button>
 </section>
 ```
-*Catatan Teknis Arsitektur:* Kombinasi constraint basis data level relasional dan reaktivitas di sisi klien menghasilkan platform backoffice yang tangguh, aman terhadap anomali data, serta memberikan pengalaman penggunaan yang responsif.
 
 ---
 
